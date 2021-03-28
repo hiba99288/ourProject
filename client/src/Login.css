@@ -1,0 +1,10 @@
+ .Login{
+     height:548px;
+     background-image: url("./../src/img/corona.png" );
+    background-repeat: no-repeat;
+    background-size: cover; 
+    padding-top: 60px; 
+}
+ img{
+ backdrop-filter: opacity(90px);
+ }
