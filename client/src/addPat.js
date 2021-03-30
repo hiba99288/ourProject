@@ -1,28 +1,33 @@
  //اضافة مريض
 import './addPat.css';
-import {useState} from "react";
+import React, { useEffect, useState   } from "react";
+
+import {  MenuItem,FormControl,  Select } from "@material-ui/core";
+
 import Axios from 'axios';
 import {useHistory} from 'react-router-dom';
 function AddPat() {
  const [values,setValues]= useState({
   name : null,
+  Idnumber:null,
   phonenum: null,
   sex: null,
-  address: null,
-  Checknumber: null,
-  Checknumber: null,
-  Checkresualt: null,
+  address: null, 
   email: null,
+  DOB: null,
+  reason: null,
+  chk_date:null,
 })
 const emptyCustomerData={
   name : null,
-  phonenum:  null,
+  Idnumber:null,
+  phonenum: null,
   sex: null,
-  address: null,
-  Checknumber: null,
-  Checknumber: null,
-  Checkresualt: null,
+  address: null, 
   email: null,
+  DOB: null,
+  chk_date:null,
+  reason: null,
 }
 const handleChange = (prop) => (event) => {
   setValues({ ...values, [prop]: event.target.value });};
@@ -35,7 +40,7 @@ const addPatiant =(e) => {
 //   }
 //  else
  Axios.post('http://localhost:2000/create',{
-              
+            
           values
     }).then(()=>{
 
@@ -44,23 +49,48 @@ setValues(emptyCustomerData);
 History.push('/adminPage2');
     })
 }; 
+const [countries, setCountries] = useState([]);
+  
+ 
+const [cities ,setCities] = useState([]) ;
+useEffect(() => {
+  const getCountriesData = async () => {
+  await fetch("http://localhost:2000/subareas")
+      .then((response) => response.json())
+      .then((data) => {
+     setCities(data);
+       const countries = data
+        .map((subareas) => ({
+          name: subareas.areaname,
+          value:subareas.id,
+        }));
+      
+       
+         setCountries(countries);  });
+  };
+  getCountriesData();
+}, []);
+
+
  return (
   <div className="main">
   <form onSubmit={addPatiant}>
   <div id="name">
   <h1 className="name">الاسم </h1>
         <input className="firstname" type="text" onChange={handleChange('name')}/></div>
-  <h2 className="name">المنطقة</h2>
-  <select className="option"  onChange={handleChange('address')}>
-     <option disabled="disabled" selected="selected"  >اختر المدينة</option>
-     <option value="hebron">الخليل</option>
-     <option value="dura">دورا</option>
-   </select>
-  <h2 className="name">الايميل</h2>
-        <input className="firstname" />
-  <h2 className="name">رقم الهاتف</h2>
+  
+        <h2 className="name">رقم الهوية</h2>
+        <input className="firstname" onChange={handleChange('Idnumber')} />
+
+        <h2 className="name">رقم الهاتف</h2>
         <input className="firstname"  type="number" onChange={handleChange('phonenum')}/>
-   <h2 className="name">  الجنس</h2>
+  
+
+        <h2 className="name">الايميل</h2>
+        <input className="firstname"  onChange={handleChange('email')}/>
+ 
+       
+  <h2 className="name">  الجنس</h2>
    <label className="radio">  ذكر
    <input className="radio-one" type="radio"  value="ذكر"  onChange={handleChange('sex')} />
         <span className="checkmark"></span>
@@ -69,16 +99,32 @@ History.push('/adminPage2');
     <input className="radio-two"  className="radio" type="radio"  value="انثى" onChange={handleChange('sex')} />
           <span className="checkmark"></span>
         </label>
-    <h2 className="name">رقم الفحص</h2>
-    <input className="firstname" type="text"  onChange={handleChange('Checknumber')} />
-    <h2 className="name">نتيجة الفحص</h2>
-    <select className="option"   onChange={handleChange('Checkresualt')}>
-          <option disabled="disabled" selected="selected"  >اختر النتيجة</option>
-          <option value="positive">ايجابي</option>
-          <option value="negative">سلبي</option>
-    </select>
+
+        <h2 className="name">   سنة الميلاد</h2>
+    <input className="firstname" type="text"  onChange={handleChange('DOB')} />
+ 
+    <h2 className="name">تاريخ الفحص</h2>
+    <input className="firstname" type="date"  onChange={handleChange('chk_date')} />
+ 
+  <h2 className="name">المنطقة</h2>
+  <select    className="option"  onChange={handleChange('address')}>
+  { countries.map((subareas) => (
+              <option value={subareas.value}>{subareas.name}</option>))}
+
+   </select>
+   <h2 className="name">سبب الفحص</h2>
+  <select    className="option"  onChange={handleChange('reason')}>
+  
+              <option > مخالط</option>
+              <option> سفر</option>
+              <option> ظهور اعراض المرض</option>
+              <option> سبب اخر</option>
+            
+
+   </select>
+   
      <br></br> 
-     <input type="date" style={{direction:"rtl"}}></input>
+     <button className='addbtn' onClick={addPatiant}> اضافة </button> 
      <button className='addbtn' onClick={addPatiant}> اضافة </button>
           {/* {message ?
           <h6>You have to fill all fields</h6>:null} */} </form> </div>
