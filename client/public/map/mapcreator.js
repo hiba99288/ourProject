@@ -59,7 +59,7 @@ function mapCreator(data){
                 radius: x.radius
             });
 
-            // thisCircle.bindPopup(popupContent);
+            thisCircle.bindPopup(popupContent);
             
             
             thisCircle.on('click', x => {
