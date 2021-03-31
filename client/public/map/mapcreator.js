@@ -28,19 +28,29 @@ function mapCreator(data){
     // Create markers & circles
         data.map( x => {
 
+            function mapInfoCard(title, value, color) {
+                return `
+                    <div dir="rtl" class="map-info-card" style="background-color: ${color}">
+                        <p>${title}</p><span style="color: ${color}">${value}</span>
+                    </div>
+                `
+            }
+
             let popupContent = `
-                <div dir="rtl" style="text-align: center; font-weight: bold;">
-                    <h3 style="text-align: center; margin: 0 auto;">${x.areaname}</h3>
-                    <p>عدد السكان: ${x.population}</p>
-                    <p style="color: darkblue;">الإصابات الكلية: ${x.casestotal  + x.recovered + x.deaths}<p>
-                    <p style="color: red;">الإصابات النشطة: ${x.casestotal}<p>
-                    <p style="color: green;">التعافي: ${x.recovered}<p>
-                    <p style="color: darkred;">الوفيات: ${x.deaths}<p>
+                <div dir="rtl" 
+                    style="text-align: center; font-weight: bold;"
+                >
+                    <div style="text-align: center; margin: 3px auto; display: block; font-size: 23pt;">${x.areaname}</div>
+                    ${mapInfoCard("عدد السكان",x.population,'purple')}<br/>
+                    ${mapInfoCard("الإصابات الكلية",(x.casestotal  + x.recovered + x.deaths),'navy')}
+                    ${mapInfoCard("الإصابات النشطة",x.population,'red')}
+                    ${mapInfoCard("المتعافين",x.population,'green')}
+                    ${mapInfoCard("الوفيات",x.population,'darkred')}
                 </div>
             `;
 
             let thisMarker = L.marker([x.latitude,x.longitude]);
-            thisMarker.bindPopup(popupContent);
+            // thisMarker.bindPopup(popupContent);
             
             let thisCircle = L.circle([x.latitude, x.longitude], {
                 color: x.color,
@@ -49,7 +59,16 @@ function mapCreator(data){
                 radius: x.radius
             });
 
-            thisCircle.bindPopup(popupContent);
+            // thisCircle.bindPopup(popupContent);
+            
+            
+            thisCircle.on('click', x => {
+                document.getElementById('map-data').innerHTML = popupContent;
+            });
+
+            thisMarker.on('click', x => {
+                document.getElementById('map-data').innerHTML = popupContent;
+            });
 
             AllMarkers.addLayer(thisMarker);
             AllCircles.addLayer(thisCircle);
@@ -57,7 +76,7 @@ function mapCreator(data){
         });
 
 
-        AllMarkers.addTo(map);
+        // AllMarkers.addTo(map);
         AllCircles.addTo(map);
 
     // Layer Controller
@@ -67,8 +86,8 @@ function mapCreator(data){
         }
 
         var overlayMaps = {
-            "Markers": AllMarkers,
-            "Circles": AllCircles,
+            // "Markers": AllMarkers,
+            "Areas": AllCircles,
         };
         
         L.control.layers(baseMaps, overlayMaps).addTo(map);

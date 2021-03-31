@@ -7,12 +7,99 @@
     <link rel="shortcut icon" href="logo.png">
 
     <style>
-        #map {
-            position: absolute;
-            top: 0;
-            bottom: 0;
-            left: 0;
-            right: 0;
+        .leaflet-popup-content-wrapper,
+        #map-data,
+        body
+        {
+            background-color: #fff5ce !important;
+        }
+
+        .leaflet-popup-content,
+        #map-data 
+        {
+            text-align: center;
+        }
+
+        @media screen and (max-width: 600px){
+            .leaflet-popup-content {
+                width: 160px !important;
+            }
+
+            #map {
+                min-height: 400px;
+                display: block;
+                width: 100%;
+            }
+
+            #map-content {
+                display: block;
+                width: 100%;
+                height:fit-content;
+            }
+
+
+        }
+
+        @media screen and (min-width: 500px){
+            .leaflet-popup-content {
+                width: 336px !important;
+            }
+
+            #map {
+                position: absolute;
+                bottom: 0;
+                left: 0;
+                top: 0;
+                right: 220px;
+                height: 100%;
+            }
+
+            #map-data {
+                position: absolute;
+                right: 0;
+                top: 0;
+                padding: auto;
+                width: 220px;
+                bottom: 0;
+                
+            }
+
+        }
+
+        .map-info-card {
+            box-sizing: border-box;
+            margin: 3px;
+            padding: 0px;
+            border-radius: 5px;
+            display: inline-block !important;
+            overflow: hidden;
+            width: 160px;
+            height: 30px;
+            color: white;
+            text-align: center;
+        }
+
+        .map-info-card * {
+            margin: 0 !important;
+            padding: 0 4px;
+            height: 100%;
+            line-height: 100%;
+            vertical-align: middle;
+            font-weight: bold;
+            display: inline-block;
+            line-height: 30px;
+        }
+
+        .map-info-card p {
+            text-align: center;
+            width: 104px;
+            float: right;
+        }
+
+        .map-info-card span {
+            width: 40px;
+            background-color: white;
+            float: left;
         }
     </style>
 
@@ -25,6 +112,7 @@
 </head>
 <body>
     <div id="map"></div>
+    <div id="map-data"></div>
 
     <script>
 
@@ -35,20 +123,6 @@
             zoom: 9,
             maxZoom: 19
         };
-
-        // Define static data for testing
-
-        // let data = [
-        //     {lat: 31.50, long: 35.50, circleColor: "red", circleFillColor: 'red', circleRadius: 5000, areaname: 'halhul', population: '120k'},
-        //     {lat: 31.60, long: 35.60, circleColor: "green", circleFillColor: 'green', circleRadius: 5000, areaname: 'nuba', population: '120k'},
-        //     {lat: 31.70, long: 35.70, circleColor: "blue", circleFillColor: 'blue', circleRadius: 5000, areaname: 'dura', population: '120k'},
-        //     {lat: 31.30, long: 35.60, circleColor: "pink", circleFillColor: 'pink', circleRadius: 5000, areaname: 'bny naem', population: '120k'},
-        //     {lat: 31.40, long: 35.50, circleColor: "purple", circleFillColor: 'purple', circleRadius: 5000, areaname: 'tafouh', population: '120k'},    
-        //     {lat: 31.80, long: 35.80, circleColor: "yellow", circleFillColor: 'yellow', circleRadius: 5000, areaname: 'hebron', population: '120k'},    
-        // ];
-        // mapCreator();
-
-
 
         // Get data from API and create map
         // 'http://localhost:2000/api/v3/mapdata'
