@@ -4,14 +4,11 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-
-  
-
     "start": "node index.js",
-    "client":"cd client && npm install",
-    "client-install":"cd client && npm install",
-    "dev":"concurrntly \"npm run start\" \"npm run client\" ",
-    "build":"cd client && npm run build",
+    "client": "cd client && npm install",
+    "client-install": "cd client && npm install",
+    "dev": "concurrntly \"npm run start\" \"npm run client\" ",
+    "build": "cd client && npm run build",
     "devStart": "nodemon index.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
@@ -30,6 +27,6 @@
     "mysql": "^2.18.1",
     "nodemon": "^2.0.7",
     "path": "^0.12.7",
-    "pug": "^3.0.0"
+    "pug": "^3.0.2"
   }
 }
