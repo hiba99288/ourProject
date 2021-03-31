@@ -50,7 +50,7 @@ function mapCreator(data){
             `;
 
             let thisMarker = L.marker([x.latitude,x.longitude]);
-            // thisMarker.bindPopup(popupContent);
+            thisMarker.bindPopup(popupContent);
             
             let thisCircle = L.circle([x.latitude, x.longitude], {
                 color: x.color,
@@ -62,13 +62,13 @@ function mapCreator(data){
             thisCircle.bindPopup(popupContent);
             
             
-            thisCircle.on('click', x => {
-                document.getElementById('map-data').innerHTML = popupContent;
-            });
+            // thisCircle.on('click', x => {
+            //     document.getElementById('map-data').innerHTML = popupContent;
+            // });
 
-            thisMarker.on('click', x => {
-                document.getElementById('map-data').innerHTML = popupContent;
-            });
+            // thisMarker.on('click', x => {
+            //     document.getElementById('map-data').innerHTML = popupContent;
+            // });
 
             AllMarkers.addLayer(thisMarker);
             AllCircles.addLayer(thisCircle);

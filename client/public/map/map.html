@@ -20,16 +20,27 @@
             text-align: center;
         }
 
+        #map {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            top: 0;
+            right: 0;
+            /* height: 100%; */
+        }
+
         @media screen and (max-width: 600px){
             .leaflet-popup-content {
                 width: 160px !important;
             }
 
-            #map {
-                min-height: 400px;
-                display: block;
-                width: 100%;
-            }
+            /*
+                #map {
+                    min-height: 400px;
+                    display: block;
+                    width: 100%;
+                }
+            */
 
             #map-content {
                 display: block;
@@ -45,14 +56,7 @@
                 width: 336px !important;
             }
 
-            #map {
-                position: absolute;
-                bottom: 0;
-                left: 0;
-                top: 0;
-                right: 220px;
-                height: 100%;
-            }
+            
 
             #map-data {
                 position: absolute;
@@ -112,7 +116,7 @@
 </head>
 <body>
     <div id="map"></div>
-    <div id="map-data"></div>
+    <!-- <div id="map-data"></div> -->
 
     <script>
 
