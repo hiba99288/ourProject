@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Map</title>
+    <link rel="shortcut icon" href="logo.png">
+
+    <style>
+        #map {
+            position: absolute;
+            top: 0;
+            bottom: 0;
+            left: 0;
+            right: 0;
+        }
+    </style>
+
+    <!-- <link rel="stylesheet" href="./leaflet.css" />
+    <script src="./leaflet.js"></script> -->
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.7.1/dist/leaflet.css" />
+    <script src="https://unpkg.com/leaflet@1.7.1/dist/leaflet.js"></script>
+    <!-- <script src="./leaflet-ajax.js"></script> -->
+    <script src="./mapcreator.js"></script>
+</head>
+<body>
+    <div id="map"></div>
+
+    <script>
+
+        // Set position & zoom
+        mapConfig = {
+            lat: 31.5,
+            long: 35,
+            zoom: 9,
+            maxZoom: 19
+        };
+
+        // Define static data for testing
+
+        // let data = [
+        //     {lat: 31.50, long: 35.50, circleColor: "red", circleFillColor: 'red', circleRadius: 5000, areaname: 'halhul', population: '120k'},
+        //     {lat: 31.60, long: 35.60, circleColor: "green", circleFillColor: 'green', circleRadius: 5000, areaname: 'nuba', population: '120k'},
+        //     {lat: 31.70, long: 35.70, circleColor: "blue", circleFillColor: 'blue', circleRadius: 5000, areaname: 'dura', population: '120k'},
+        //     {lat: 31.30, long: 35.60, circleColor: "pink", circleFillColor: 'pink', circleRadius: 5000, areaname: 'bny naem', population: '120k'},
+        //     {lat: 31.40, long: 35.50, circleColor: "purple", circleFillColor: 'purple', circleRadius: 5000, areaname: 'tafouh', population: '120k'},    
+        //     {lat: 31.80, long: 35.80, circleColor: "yellow", circleFillColor: 'yellow', circleRadius: 5000, areaname: 'hebron', population: '120k'},    
+        // ];
+        // mapCreator();
+
+
+
+        // Get data from API and create map
+        // 'http://localhost:2000/api/v3/mapdata'
+
+        let data = []
+        fetch('./api-data.json')
+            .then(res => res.json())
+            .then(json=>{
+                data=json;
+                console.log('json', json);
+                mapCreator(data);
+            }).catch(err=>console.log(err));
+
+        // Notes:
+
+        // Get radius from circle area:
+        // r = Math.sqrt( area * (7 / 22) )
+
+        // 1 degree of latitude is 110 km
+    </script>
+</body>
+</html>
