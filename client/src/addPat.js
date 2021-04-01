@@ -225,13 +225,13 @@
              </tr>:
              <tr>
                <td><input defaultValue={val.name} 
-                 ref={this.input}
+                 
                 onChange={(event) => {
                      setNewName(event.target.value);
                    }}></input></td>
                <td><input placeholder={val.Idnumber}></input></td>
                <td><input defaultValue={val.sex}></input></td>
-               <td><input defaultValue={val.DOB}  value={this.target.defaultValue} onChange={(event) => {
+               <td><input defaultValue={val.DOB}   onChange={(event) => {
                      setNewDOB(event.target.value);
                    }}></input></td>
                <td><input placeholder={val.address}></input></td>
