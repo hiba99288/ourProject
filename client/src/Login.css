@@ -8,3 +8,32 @@
  img{
  backdrop-filter: opacity(90px);
  }
+
+ .paper {
+    /* marginTop: theme.spacing(8);
+    display: 'flex';
+    flexDirection: 'column';
+    alignItems: 'center';
+    backgroundColor:'white';
+    marginTop : "-21px";
+    alignItems: "center";
+  
+    width: "613px";
+    height: "479px";
+    paddingTop: "60px";
+    padding: "55px";
+    borderRadius: "30px"; */
+  }
+
+.Login main {
+    background-color: #fff5ce77;
+    padding: 28px;
+    border-radius: 20px;
+    border: 2px solid  #00aeff;
+    width: min(444px, 90%);
+    max-width: min(444px, 90%);
+}
+
+.Login main h1 {
+    text-align: center;
+}

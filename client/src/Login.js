@@ -14,23 +14,7 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 const useStyles = makeStyles((theme) => ({
-    paper: {
-      marginTop: theme.spacing(8),
-      display: 'flex',
-      flexDirection: 'column',
-      alignItems: 'center',
-      backgroundColor:'white',
-      marginTop : "-21px",
-      alignItems: "center",
-    
-      width: "613px",
-      height: "479px",
-      paddingTop: "60px",
-      padding: "55px",
-      borderRadius: "30px"
-    },
-  
-    form: {
+      form: {
       width: '100%', // Fix IE 11 issue.
       marginTop: theme.spacing(1),
     },
@@ -61,7 +45,7 @@ password:password,
  console.log(response);}); };
 
 return ( 
-<div className="Login">
+<div className="Login" dir="ltr">
   <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
@@ -71,11 +55,11 @@ return (
           </Typography> 
           <form method="POST"
     onSubmit={login} >
-      <TextField variant="outlined"  margin="normal"  required   fullWidth id="email" label="username"  name="email"autoComplete="email" autoFocus onChange={(e)=>{setUsername(e.target.value);}}/>
-       <TextField  variant="outlined"  margin="normal" required fullWidth name="password"  label="Password"type="password" id="password" autoComplete="current-password" onChange={(e)=>{setPassword(e.target.value);} } />
+      <TextField variant="outlined"  margin="normal"  required   fullWidth id="email" label="اسم المستخدم"  name="email"autoComplete="email" autoFocus onChange={(e)=>{setUsername(e.target.value);}}/>
+       <TextField  variant="outlined"  margin="normal" required fullWidth name="password"  label="كلمة السرّ" type="password" id="password" autoComplete="current-password" onChange={(e)=>{setPassword(e.target.value);} } />
          
  
- <Button  type="submit"  fullWidth variant="contained"  color="primary"  className={classes.submit}>Login</Button></form></div></Container></div>
+ <Button  type="submit"  fullWidth variant="contained"  color="primary"  className={classes.submit}>تسجيل الدخول</Button></form></div></Container></div>
 )}
 export default Login ;
 
