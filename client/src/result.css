@@ -1,4 +1,64 @@
- 
+* {
+   box-sizing: border-box;
+   margin: 0;
+   padding: 0;
+}
+
+.Results {
+   text-align: center;
+   background-image: url("./../src/img/resultpack.jpg");
+   background-position: center;
+   background-size: cover;
+   min-height: 100vh;
+   width: 100vw;
+   position: absolute;
+   top: 64px;
+   left: 0;
+   right: 0;
+   bottom: 0;
+   padding: 10vh 0;
+}
+
+.Results main {
+   background-color: #ffffff88;
+   padding: 0 28px;
+   border-radius: 20px;
+   border: 2px solid  #00aeff;
+   width: min(444px, 90%);
+   max-width: min(444px, 90%);
+   margin: 0 auto;
+}
+
+/* .Results main > div {
+   margin: 8vh auto;
+
+} */
+
+.Results main h1 {
+   text-align: center;
+   margin: 20px auto;
+   color: rgba(0, 0, 0, 0.87);
+} 
+
+.Results main div {
+   display: block;
+   margin: 20px auto;
+}
+
+.Results main .app-text {
+   min-height: 30px;
+   max-height: 55px;
+}
+
+@media screen and (max-height: 400px) {
+   .Results {
+      min-height: 125vh !important;
+   }
+}
+
+
+/* 
+
 .ss{
 
    text-align: center;
@@ -59,4 +119,4 @@ margin: 30px;
 margin-top: 21px;
 
 
-  }
+  } */
