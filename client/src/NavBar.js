@@ -1,4 +1,5 @@
 import React from 'react';
+import './NavBar.css';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
 import Toolbar from '@material-ui/core/Toolbar';
@@ -25,21 +26,45 @@ import CoronaImg from './../src/img/logo.png';
   const handleClick = () => { setOpen((prev) => !prev); };
   const handleClickAway = () => {  setOpen(false); };
  return (
-    <div className={classes.root} >
+    <div className={classes.root} className="navbar-navroot">
       <AppBar position='static' style={{backgroundColor:"#00aeff  " , color:"white", height: "65px"}}>
-        <Toolbar>
+        <Toolbar className="navbar-toolbar">
           <ClickAwayListener onClickAway={handleClickAway}>
             <IconButton edge='start'  className={classes.menuButton} color='inherit' aria-label='menu'onClick={handleClick}>
               <MenuIcon />
               {open ? (
           <div className={classes.dropdown}>
+
+            <Button color='inherit' href='/'>
+              {' '}
+              <HomeIcon />
+              الرئيسيه
+            </Button>
+            <Button color='inherit' href='/Login'>
+              <PersonIcon />
+              تسجيل الدخول
+            </Button>
+            <Button color='inherit' href='/result'>
+              <VerifiedUserIcon />
+              فحص حالة
+            </Button>
+            <Button color='inherit' href='/hospital'>
+              <VerifiedUserIcon />
+              المستشفيات
+            </Button>
+            <Button color='inherit' href='/Instruction'>
+              <VerifiedUserIcon />
+            ارشادات
+            </Button>
+            <hr />
             <Button className={classes.menueList} >تعليمات</Button>
             <Button className={classes.menueList}>تواصل معنا</Button>
             <Button className={classes.menueList}>احصائيات عالميه</Button>
-            <Button className={classes.menueList}>abute us</Button>  </div>
-        ) : null}
+            <Button className={classes.menueList}>abute us</Button> 
+          </div>) : null}
             </IconButton>
           </ClickAwayListener>
+          
           <Button color='inherit' href='/'>
             {' '}
             <HomeIcon />
@@ -61,6 +86,7 @@ import CoronaImg from './../src/img/logo.png';
             <VerifiedUserIcon />
            ارشادات
           </Button>
+
         </Toolbar>
         {/* <Typography variant='h6' className={classes.title}> */}
            <img id='navbar-logo' src={CoronaImg} alt='yarmouk-logo' className={classes.logo} />
