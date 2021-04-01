@@ -1,4 +1,4 @@
- const express = require('express')
+const express = require('express')
 const app=express();
 const cors = require('cors')
 const mysql =require('mysql');
@@ -196,7 +196,7 @@ app.post("/create", (req, res) => {
   
       
       db.query(
-    "SELECT idnumber,phonenum ,name ,covidTestResult FROM patient NATURAL JOIN covidtest WHERE idnumber=? AND phonenum=?   ",
+    "SELECT * FROM patient NATURAL JOIN covidtest WHERE idnumber=? AND phonenum=?   ",
     [idnumber , phonenum  ],
     (err,result)=>{
       if(err){
@@ -245,6 +245,42 @@ app.post("/create", (req, res) => {
         }
       );
     }); 
+
+
+
+
+    app.put("/update", (req, res) => {
+      const name = req.body.values.name;
+      const Idnumber= req.body.values.Idnumber;
+      const phonenum = parseInt( req.body.values.phonenum);
+      const sex = req.body.values.sex;
+      const address = req.body.values.address;
+      const email = req.body.values.email;
+      const DOB = req.body.values.DOB;
+      const chk_date = req.body.values.chk_date;
+      const reason = req.body.values.reason;
+      db.query(
+        "UPDATE patient SET DOB = ?, name = ?,phonenum = ?,sex = ?,address = ? ,email = ? ,chk_date = ? ,reason = ? WHERE Idnumber = ?",
+        [DOB, Idnumber , name ,phonenum ,sex  ,address  ,email  ,chk_date ,reason   ],
+        (err, result) => {
+          if (err) {
+            console.log(err);
+          } else {
+            res.send(result);
+          }
+        }
+      );
+    });
+    app.delete("/delete/:Idnumber", (req, res) => {
+      const Idnumber = req.params.Idnumber;
+      db.query("DELETE FROM patient WHERE Idnumber = ?", Idnumber, (err, result) => {
+        if (err) {
+          console.log(err);
+        } else {
+          res.send(result);
+        }
+      });
+    });
         
 //انشاء حساب مستخدم جديد
       app.post("/accounts", (req, res) => {
