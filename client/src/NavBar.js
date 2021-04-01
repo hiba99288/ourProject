@@ -26,7 +26,7 @@ import CoronaImg from './../src/img/logo.png';
   const handleClickAway = () => {  setOpen(false); };
  return (
     <div className={classes.root} >
-      <AppBar position='static' style={{backgroundColor:"#00aeff  " , color:"white"}}>
+      <AppBar position='static' style={{backgroundColor:"#00aeff  " , color:"white", height: "65px"}}>
         <Toolbar>
           <ClickAwayListener onClickAway={handleClickAway}>
             <IconButton edge='start'  className={classes.menuButton} color='inherit' aria-label='menu'onClick={handleClick}>
@@ -40,10 +40,6 @@ import CoronaImg from './../src/img/logo.png';
         ) : null}
             </IconButton>
           </ClickAwayListener>
-          <Typography variant='h6' className={classes.title}>
-           <img src={CoronaImg} alt='yarmouk-logo' className={classes.logo} />
-      
-          </Typography>
           <Button color='inherit' href='/'>
             {' '}
             <HomeIcon />
@@ -66,5 +62,9 @@ import CoronaImg from './../src/img/logo.png';
            ارشادات
           </Button>
         </Toolbar>
+        {/* <Typography variant='h6' className={classes.title}> */}
+           <img id='navbar-logo' src={CoronaImg} alt='yarmouk-logo' className={classes.logo} />
+      
+          {/* </Typography> */}
       </AppBar>
     </div>  ); }

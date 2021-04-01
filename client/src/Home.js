@@ -1,6 +1,6 @@
 import React, { useEffect, useState   } from "react";
 import "./Home.css"; 
- import {  MenuItem,FormControl,  Select, CardContent, Card } from "@material-ui/core";
+import {  MenuItem,FormControl,  Select, CardContent, Card } from "@material-ui/core";
 import InfoBox from "./InfoBox";
 import {sortData} from "./Util"
 import Axios from 'axios';
@@ -69,118 +69,14 @@ function  Home() {
 
   return (
     <div className="app">
-      {/* <div>
-    <MaterialTable ptions={{
-                            rowStyle: x => {
-                                if ( x.id % 2 ) {
-                                return { backgroundColor: "#f2f2f2" }
-                                }
-                            },
-                            'headerStyle' : {
-                                backgroundColor: 'red',
-                                color: theme.palette.common.white
-                            }
-                            }}
-    style={{width:"90px"}}
-            title="Employee Data"
-            data={date}
-            columns={columns}
-          />
-    </div> */}
-      <Instruction></Instruction>
-      <div className="leftright">
-        <div className="app_left">
-          <iframe
-            src="/map/map.html"
-            title="map"
-            id="map"
-            height="100%"
-            width="100%"
-          ></iframe>
-        </div>
-
-        <div className="app_right">
-          <div>
-            {" "}
-            <FormControl className="app__dropdown">
-              {/* اللي بنختار منها المنطقة */}
-              <Select variant="outlined" onChange={onCountryChange} value={country}>
-                <MenuItem value="worldwide">worldwide</MenuItem>
-                {countries.map((subareas) => (
-                  <MenuItem value={subareas.value}>{subareas.name}</MenuItem>
-                ))}
-              </Select>
-            </FormControl>{" "}
-          </div>
-          {countryInfo ? (
-            <div className="app_stats">
-              {/*     
-          <div class="card">
-          <div class="circle">
-          <h2> 02</h2>
-          </div>
-          <div class="content">
-            <p> hhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
-            <a href="#">  Read More </a>
-          </div>
-          </div>
-          <div class="card">
-            <div class="circle">
-            <h2> 03</h2>
-            </div>
-            <div class="content">
-                <p> hhhhhhhhhhhhhhhhhhhhhhhhhhh</p>
-                <a href="#">  Read More </a>
-            </div>
-            </div> */}
-
-              <div class="container">
-                <div class="card">
-                  <div class="circle">
-                    <h3>الحالات</h3>
-                  </div>
-                  <div class="content">
-                    <InfoBox
-                      className="InfoBox"
-                      title="حالات الشفاء "
-                      value={countryInfo[0].recovered}
-                      total={countryInfo[0].radius}
-                    ></InfoBox>
-                  </div>
-                </div>
-
-                <div class="card">
-                  <div class="circle">
-                    <h3>الحالات</h3>
-                  </div>
-                  <div class="content">
-                    <InfoBox
-                      title="حالات الوفاة"
-                      value={countryInfo[0].recovered}
-                      total={countryInfo.deaths}
-                    ></InfoBox>
-                  </div>
-                </div>
-
-                <div class="card">
-                  <div class="circle">
-                    <h3>الحالات</h3>
-                  </div>
-                  <div class="content">
-                    <InfoBox
-                      title="الحالات المسجلة"
-                      value={countryInfo[0].recovered}
-                      total={countryInfo.cases}
-                    ></InfoBox>
-                  </div>
-                </div>
-              </div>
-            </div>
-          ) : null}{" "}
-        </div>
-      </div>
-
-      <Chart></Chart>
+      <iframe id="map-iframe"
+        src="/map/map.html"
+        title="map"
+        id="map"
+        height="100%"
+        width="100%"
+      >
+      </iframe>
     </div>
   );
 }

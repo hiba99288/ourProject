@@ -81,13 +81,13 @@ function mapCreator(data){
 
     // Layer Controller
         var baseMaps = {
-            "OSM": osm,
+            "Open Street Map": osm,
             "Open Topology Map": OpenTopoMap
         }
 
         var overlayMaps = {
             // "Markers": AllMarkers,
-            "Areas": AllCircles,
+            "المناطق": AllCircles,
         };
         
         L.control.layers(baseMaps, overlayMaps).addTo(map);
