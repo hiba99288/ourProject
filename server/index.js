@@ -4,15 +4,24 @@ const cors = require('cors')
 const mysql =require('mysql');
 const path =require('path');
 app.use(cors());
+
+var bodyParser = require('body-parser')
+app.use( bodyParser.json() );       // to support JSON-encoded bodies
+app.use(bodyParser.urlencoded({     // to support URL-encoded bodies
+  extended: true
+})); 
+
 app.use(express.json());
 app.use(express.static(path.join(__dirname ,'..','client' , 'build')));
  
- app.use(express.urlencoded({extended:false}))
+ app.use(express.urlencoded({extended: true}))
  app.set('view engine','ejs')
 const db = mysql.createPool({
 host:'localhost',
-user:'root',
-password:'az554455',
+// user:'root',
+user:'fgp',
+// password:'az554455',
+password:'fgp',
 database:'fgp',
 
 
@@ -249,24 +258,17 @@ app.post("/create", (req, res) => {
 
 
 
-    app.put("/update", (req, res) => {
-      const name = req.body.values.name;
-      const Idnumber= req.body.values.Idnumber;
-      const phonenum = parseInt( req.body.values.phonenum);
-      const sex = req.body.values.sex;
-      const address = req.body.values.address;
-      const email = req.body.values.email;
-      const DOB = req.body.values.DOB;
-      const chk_date = req.body.values.chk_date;
-      const reason = req.body.values.reason;
+    app.post("/update", (req, res) => {
+      let {name, Idnumber, phonenum, sex, address, email, DOB, chk_date, reason} = req.body;
       db.query(
         "UPDATE patient SET DOB = ?, name = ?,phonenum = ?,sex = ?,address = ? ,email = ? ,chk_date = ? ,reason = ? WHERE Idnumber = ?",
-        [DOB, Idnumber , name ,phonenum ,sex  ,address  ,email  ,chk_date ,reason   ],
+        [ DOB, name ,phonenum ,sex  ,address  ,email  ,chk_date ,reason, Idnumber],
         (err, result) => {
           if (err) {
             console.log(err);
           } else {
-            res.send(result);
+            // res.send(result);
+            res.send("success");
           }
         }
       );
