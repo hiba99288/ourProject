@@ -1,5 +1,6 @@
 //اضافة مريض
-import "./addPat.css";
+import './Table.css';
+
 import React, { useEffect, useState } from "react";
 
 import { MenuItem, FormControl, Select } from "@material-ui/core";
@@ -34,13 +35,8 @@ function AddPat() {
     setValues({ ...values, [prop]: event.target.value });
   };
   const History = useHistory();
-  //  const [message, setMessage] = useState(false);
-  const addPatiant = (e) => {
+  const addPatient = (e) => {
     e.preventDefault();
-    //   if(!values.name || !values.phonenum || !values.sex|| !values.address || !values.Checknumber || !values.Checkresualt || !values.email || !values.DOB){
-    //     return setMessage(true)
-    //   }
-    //  else
     Axios.post("http://localhost:2000/create", {
       values,
     }).then(() => {
@@ -50,7 +46,7 @@ function AddPat() {
     });
   };
 
-  const getEmployees = () => {
+  const getPatients = () => {
     Axios.get("http://localhost:2000/patient").then((response) => {
       setPatientList(response.data);
     });
@@ -58,7 +54,7 @@ function AddPat() {
   const [newDOB, setNewDOB] = useState(0);
   const [newName, setNewName] = useState("");
 
-  const updateEmployeeWage = (Idnumber) => {
+  const updatePatient = (Idnumber) => {
     console.log(Idnumber);
     // return;
     const result = patientList.filter(pat => {
@@ -69,38 +65,35 @@ function AddPat() {
     Axios.post("http://localhost:2000/update", result[0]).then((response) => {
       if((response.status == 200) && response.data == "success"){
         console.log('Record Updated');
+        alert('تم التعديل');
       } else {
         console.log('Update failed');
+        alert('فشل التعديل. حاول مرة أخرى.');
       }
       console.log(response.data);
-
-      // setPatientList(
-      //   patientList.map((val) => {
-      //     return val.Idnumber == Idnumber
-      //       ? {
-      //           Idnumber: val.Idnumber,
-      //           name: newName,
-      //           DOB: newDOB,
-      //           sex: val.sex,
-      //           address: val.address,
-      //         }
-      //       : val;
-      //   })
-      // );
     });
   };
 
-  const deleteEmployee = (Idnumber) => {
-    Axios.delete(`http://localhost:2000/delete/${Idnumber}`).then(
-      (response) => {
-        alert("are  you sure?");
-        setPatientList(
-          patientList.filter((val) => {
-            return val.Idnumber != Idnumber;
-          })
-        );
-      }
-    );
+  const deletePatient = (Idnumber) => {
+    /* eslint-disable no-restricted-globals */
+    if (confirm('هل أنت متأكد؟')){
+    /* eslint-enable no-restricted-globals */
+      Axios.delete(`http://localhost:2000/delete/${Idnumber}`).then(
+        (response) => {
+          if (response.status == 200) {
+            setPatientList(
+              patientList.filter((val) => {
+                return val.Idnumber != Idnumber;
+              })
+            );
+            alert('تم الحذف بنجاح');
+          } else {
+            alert('فشل الحذف');
+          }
+        }
+      );
+    }
+
   };
 
   const [countries, setCountries] = useState([]);
@@ -113,7 +106,6 @@ function AddPat() {
         .then((response) => response.json())
         .then((data) => {
           setCities(data);
-          // console.log(data);
           const countries = data.map((subareas) => ({
             name: subareas.areaname,
             value: subareas.id,
@@ -124,109 +116,125 @@ function AddPat() {
         });
     };
     getCountriesData();
+    getPatients();
   }, []);
 
   const [show, setShow] = useState(true);
   const [showAdd, setShowAdd] = useState(false);
   const [showPat, setShowPat] = useState(false);
+
   return (
     <div className="main">
       {showAdd ? (
-        <form onSubmit={addPatiant}>
-          <button onClick={() => setShowAdd(!showAdd)}> اضافة مريض جديد</button>
+        <form onSubmit={addPatient}>
+          <div class="button back-button"  onClick={() => setShowAdd(!showAdd)}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 3.752l-4.423-3.752-7.771 9.039-7.647-9.008-4.159 4.278c2.285 2.885 5.284 5.903 8.362 8.708l-8.165 9.447 1.343 1.487c1.978-1.335 5.981-4.373 10.205-7.958 4.304 3.67 8.306 6.663 10.229 8.006l1.449-1.278-8.254-9.724c3.287-2.973 6.584-6.354 8.831-9.245z"/></svg>
+          </div>
+          <br/>
 
-          <div id="name">
-            <button onClick={() => setShowPat(!showPat)}>back</button>
-            <h1 className="name">الاسم </h1>
+          <div class="addPat-add-card">
+            <label className="name">الاسم </label>
             <input
               className="firstname"
               type="text"
               onChange={handleChange("name")}
             />
           </div>
-
-          <h2 className="name">رقم الهوية</h2>
-          <input className="firstname" onChange={handleChange("Idnumber")} />
-
-          <h2 className="name">رقم الهاتف</h2>
-          <input
-            className="firstname"
-            type="number"
-            onChange={handleChange("phonenum")}
-          />
-
-          <h2 className="name">الايميل</h2>
-          <input className="firstname" onChange={handleChange("email")} />
-
-          <h2 className="name"> الجنس</h2>
-          <label className="radio">
-            {" "}
-            ذكر
+          
+          <div class="addPat-add-card">
+            <label className="name">رقم الهوية</label>
+            <input className="firstname" onChange={handleChange("Idnumber")} />
+          </div>
+          
+          <div class="addPat-add-card">
+            <label className="name">رقم الهاتف</label>
             <input
-              className="radio-one"
-              type="radio"
-              value="ذكر"
-              onChange={handleChange("sex")}
+              className="firstname"
+              type="number"
+              onChange={handleChange("phonenum")}
             />
-            <span className="checkmark"></span>
-          </label>
-          <label className="radio">
-            {" "}
-            انثى
+          </div>
+          
+          <div class="addPat-add-card">
+            <label className="name">الايميل</label>
+            <input className="firstname" onChange={handleChange("email")} />
+          </div>
+          
+          <div class="addPat-add-card sex">
+            <label className="name"> الجنس</label>
+            <label className="radio">
+              ذكر
+              <input
+                className="radio-one"
+                type="radio"
+                name="sex"
+                value="ذكر"
+                onChange={handleChange("sex")}
+              />
+            </label>
+            <label className="radio">
+              انثى
+              <input
+                className="radio-two"
+                className="radio"
+                type="radio"
+                name="sex"
+                value="انثى"
+                onChange={handleChange("sex")}
+              />
+            </label>
+          </div>
+          
+          <div class="addPat-add-card">
+            <label className="name"> سنة الميلاد</label>
             <input
-              className="radio-two"
-              className="radio"
-              type="radio"
-              value="انثى"
-              onChange={handleChange("sex")}
+              className="firstname"
+              type="text"
+              onChange={handleChange("DOB")}
             />
-            <span className="checkmark"></span>
-          </label>
-
-          <h2 className="name"> سنة الميلاد</h2>
-          <input
-            className="firstname"
-            type="text"
-            onChange={handleChange("DOB")}
-          />
-
-          <h2 className="name">تاريخ الفحص</h2>
-          <input
-            className="firstname"
-            type="date"
-            onChange={handleChange("chk_date")}
-          />
-
-          <h2 className="name">المنطقة</h2>
-          <select className="option" onChange={handleChange("address")}>
-            {countries.map((subareas, index) => (
-              <option key={index} value={subareas.value}>{subareas.name}</option>
-            ))}
-          </select>
-          <h2 className="name">سبب الفحص</h2>
-          <select className="option" onChange={handleChange("reason")}>
-            <option> مخالط</option>
-            <option> سفر</option>
-            <option> ظهور اعراض المرض</option>
-            <option> سبب اخر</option>
-          </select>
-
-          <br></br>
-          <button className="addbtn" onClick={addPatiant}>
-            {" "}
-            اضافة{" "}
-          </button>
-          {/* {message ?
-           <h6>You have to fill all fields</h6>:null} */}
+          </div>
+          
+          <div class="addPat-add-card">
+            <label className="name">تاريخ الفحص</label>
+            <input
+              className="firstname"
+              type="date"
+              onChange={handleChange("chk_date")}
+            />
+          </div>
+          
+          <div class="addPat-add-card">
+            <label className="name">المنطقة</label>
+            <select className="option" onChange={handleChange("address")}>
+              {countries.map((subareas, index) => (
+                <option key={index} value={subareas.value}>{subareas.name}</option>
+              ))}
+            </select>
+          </div>
+          
+          <div class="addPat-add-card">
+            <label className="name">سبب الفحص</label>
+            <select className="option" onChange={handleChange("reason")}>
+              <option> مخالط</option>
+              <option> سفر</option>
+              <option> ظهور اعراض المرض</option>
+              <option> سبب اخر</option>
+            </select>
+          </div>
+          
+          <br/>
+          <div className="button addbtn" onClick={addPatient}>
+            اضافة
+          </div>
         </form>
       ) : (
         <div>
-          <button onClick={() => setShowAdd(!showAdd)}> اضافة مريض جديد</button>
-
-          <button className="addbtn" onClick={getEmployees}>
-            {" "}
-            عرض سجل المرضى{" "}
-          </button>
+          <div class="button add-button" onClick={() => setShowAdd(!showAdd)}>
+            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm7 14h-5v5h-4v-5h-5v-4h5v-5h4v5h5v4z"/></svg>
+          </div>
+          <div class="button edit-button" onClick={() => setShow(!show)}>
+          <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M7.127 22.562l-7.127 1.438 1.438-7.128 5.689 5.69zm1.414-1.414l11.228-11.225-5.69-5.692-11.227 11.227 5.689 5.69zm9.768-21.148l-2.816 2.817 5.691 5.691 2.816-2.819-5.691-5.689z"/></svg>
+          </div>
           <table>
             <thead>
               <tr>
@@ -235,37 +243,33 @@ function AddPat() {
                 <th>الحنس</th>
                 <th>تاريخ الميلاد</th>
                 <th>مكان السكن</th>
+                {!show ? <th>إجراءات</th> :''}
               </tr>
             </thead>
-              {patientList.map((val, key) => {
-                // console.table(key, val);
+            <tbody>
+              {patientList.map((val, index) => {
                 return (
-                  <tbody>
+                  <>
                     {show ? (
-                      <tr key={val.Idnumber} style={{ direction: "rtl", border: "1px solid #ddd" }}>
+                      <tr key={index}>
                         <td>
-                          {" "}
-                          <h3>{val.name}</h3>{" "}
+                          {val.name}
                         </td>
                         <td>
-                          {" "}
-                          <h3>{val.Idnumber}</h3>
+                          {val.Idnumber}
                         </td>
                         <td>
-                          {" "}
-                          <h3>{val.sex}</h3>
+                          {val.sex}
                         </td>
                         <td>
-                          {" "}
-                          <h3>{val.DOB}</h3>
+                          {val.DOB}
                         </td>
                         <td>
-                          {" "}
-                          <h3>{val.address}</h3>
+                          {val.address}
                         </td>
                       </tr>
                     ) : (
-                      <tr key={val.Idnumber}>
+                      <tr key={index}>
                         <td>
                           <input
                             defaultValue={val.name}
@@ -302,35 +306,28 @@ function AddPat() {
                           <input placeholder={val.address}></input>
                         </td>
                         <td>
-                          {" "}
-                          <button
+                          <div class="button update"
                             onClick={() => {
-                              updateEmployeeWage(val.Idnumber);
+                              updatePatient(val.Idnumber);
                             }}
                           >
-                            {" "}
-                            Update
-                          </button>
-                        </td>
-
-                        <td>
-                          {" "}
-                          <button
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M22 2v20h-20v-20h20zm2-2h-24v24h24v-24zm-5.541 8.409l-1.422-1.409-7.021 7.183-3.08-2.937-1.395 1.435 4.5 4.319 8.418-8.591z"/></svg>
+                          </div>
+                          <div class="button delete"
                             onClick={() => {
-                              deleteEmployee(val.Idnumber);
+                              deletePatient(val.Idnumber);
                             }}
                           >
-                            Delete
-                          </button>
+                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M22 2v20h-20v-20h20zm2-2h-24v24h24v-24zm-6 16.538l-4.592-4.548 4.546-4.587-1.416-1.403-4.545 4.589-4.588-4.543-1.405 1.405 4.593 4.552-4.547 4.592 1.405 1.405 4.555-4.596 4.591 4.55 1.403-1.416z"/></svg>
+                          </div>
                         </td>
                       </tr>
                     )}
-                  </tbody>
+                  </>
                 );
               })}
+            </tbody>
           </table>
-
-          <button onClick={() => setShow(!show)}>edit</button>
         </div>
       )}
     </div>

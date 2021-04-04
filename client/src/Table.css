@@ -1,21 +1,177 @@
-.table {
-    margin-top: 20px;
-    overflow: scroll;
-    height: 400px;
-    color: #6a5d5d;
-    background-color: rgb(245, 169, 169);
-    width: 350px;
-  }
+.main {
+  width: 90%;
+  margin: auto;
+  padding-top: 2vw;
+  text-align: center;
+}
   
-  .table tr {
-    display: flex;
-    justify-content: space-between;
+table {
+  width: 100%;
+  max-width: 100%;
+  margin: 0;
+  padding: 0;
+  background-color: white;
+  color: black;
+
+  font-family: Arial, Helvetica, sans-serif !important;
+  border-collapse: collapse;
+
+  border: 1px solid #ddd;
+  padding: 8px;
+}
+
+thead {
+  background-color: #3765ae;
+  color: white;
+  font-size: calc(5pt + 1vw);
+  font-weight: bold;
+}
+
+th {
+  padding-top: 12px;
+  padding-bottom: 12px;
+}
+
+tbody {
+  font-size: calc(4pt + 1vw);
+  font-weight: normal;
+}
+
+tbody tr:nth-child(odd) {
+  background-color: #d3effb;
+}
+
+tbody tr:hover {
+  background-color: #00a0d9;
+  color: white;
+}
+
+th {
+  padding: 10px 15px;
+}
+
+td {
+  padding: 5px;
+}
+
+table input {
+  width: 95%;
+  min-width: 100px;
+}
+
+table .button {
+  width: 25px;
+  height:25px;
+}
+
+table .button * {
+  width: 25px;
+  height: 25px;
+  position: relative;
+  margin: 0;
+  padding: 0;
+  top: 0;
+  left:0;
+  right: 0;
+  bottom: 0;
+}
+
+.button {
+  cursor: pointer;
+  margin: auto 5px;
+  display: inline-block;
+  text-align: center;
+}
+
+table .update {
+  fill: green;
+}
+
+table .delete {
+  fill: red;
+}
+
+.add-button svg {
+  height: 30px;
+  width: 30px;
+  margin: 0 5px;
+  fill: green;
+}
+
+.back-button {
+  display: block;
+  text-align: start;
+  margin: 25px 25px 0;
+}
+
+.add-button,
+.back-button,
+.edit-button {
+  padding: 0;
+  /* width: 30px;
+  height: 30px; */
+}
+
+.back-button svg {
+  fill: red;
+}
+
+.edit-button svg {
+  fill: orangered;
+}
+
+.addPat-add-card {
+  display: inline-block;
+  margin: 5px 15px;
+  padding: 10px 8px;
+  border: 2px solid #00aeff;
+  border-radius: 10px 0 10px 0;
+  border-bottom: 3px #3765ae solid;
+  border-right: 3px #3765ae solid;
+  color: #3765ae;
+  width: 290px;
+  height: 70px;
+  font-size: 14pt;
+  font-weight: bold;
+}
+
+.addPat-add-card > * {
+  margin: 10px auto;
+  width: 125px;
+  height: 27px;
+  line-height: 100%;
+}
+
+.addPat-add-card.sex > * {
+  width: 78px;
+}
+
+.addPat-add-card * {
+  display: inline-block;
+}
+
+.addbtn {
+  margin-top: 40px;
+  height: 60px;
+  width: 150px;
+  border-radius: 10px;
+  background-color: #3765ae;
+  border: 3px #3765ae solid;
+  font-weight: bold;
+  font-size: 20pt;
+  padding: 10px;
+  color: white;
+  margin-bottom: 70px;
+}
+
+@media screen and (max-width: 400) {
+  .main{
+    padding: 0;
+    margin: auto;
+    width: 99vw !important;
   }
-  
-  .table td {
-    padding: 0.5rem;
+
+  .addPat-add-card {
+    margin: 5px 0;
   }
-  .table tr:nth-of-type(odd) {
-    background-color: #f3f2f8;
-  }
-  
+}

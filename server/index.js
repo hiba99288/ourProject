@@ -261,8 +261,8 @@ app.post("/create", (req, res) => {
     app.post("/update", (req, res) => {
       let {name, Idnumber, phonenum, sex, address, email, DOB, chk_date, reason} = req.body;
       db.query(
-        "UPDATE patient SET DOB = ?, name = ?,phonenum = ?,sex = ?,address = ? ,email = ? ,chk_date = ? ,reason = ? WHERE Idnumber = ?",
-        [ DOB, name ,phonenum ,sex  ,address  ,email  ,chk_date ,reason, Idnumber],
+        "UPDATE patient SET DOB = ?, name = ?,phonenum = ?,sex = ?,address = ? ,email = ? ,reason = ? WHERE Idnumber = ?",
+        [ DOB, name ,phonenum ,sex  ,address  ,email ,reason, Idnumber],
         (err, result) => {
           if (err) {
             console.log(err);
