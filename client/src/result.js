@@ -41,7 +41,7 @@ function Result(){
       <main>
         <ThemeProvider theme={theme}>
           <Typography component="h1" variant="h5">
-              تسجيل الدخول
+              فحص الحالة
           </Typography> 
           <TextField id="outlined-secondary"
             label="رقم الهوية"

@@ -25,7 +25,6 @@ function App(){
         <Route exact component={Instruction} path="/Instruction"/>
         <Route exact component={AddPat} path="/AddPat"/>
         <Route exact component={doctorpage} path="/doctorpage"/>
-        <Route exact component={Result} path="/result"/>
         <Route exact component={Hospital} path="/hospital"/>
       </Switch>
     </Router> 
