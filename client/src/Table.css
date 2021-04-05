@@ -4,7 +4,22 @@
   padding-top: 2vw;
   text-align: center;
 }
-  
+
+h2.main-title {
+  color: #3765ae;
+  font-size: 27pt;
+  margin: 15px auto;
+}
+
+h3.sub-title {
+  color: #3765ae;
+  font-size: 18pt;
+  margin: 18px auto;
+  display: block;
+  width: 280px;
+}
+
+
 table {
   width: 100%;
   max-width: 100%;
@@ -15,9 +30,11 @@ table {
 
   font-family: Arial, Helvetica, sans-serif !important;
   border-collapse: collapse;
-
-  border: 1px solid #ddd;
   padding: 8px;
+
+  border-radius: 15px;
+  overflow: hidden;
+  /* border: 3px solid #3765ae; */
 }
 
 thead {
@@ -81,6 +98,16 @@ table .button * {
   margin: auto 5px;
   display: inline-block;
   text-align: center;
+  line-height: 25px;
+  width: fit-content;
+}
+
+.button p
+{
+  display: inline-block;
+  position: relative;
+  top: -8px;
+  margin: 0 12px;
 }
 
 table .update {
@@ -91,6 +118,10 @@ table .delete {
   fill: red;
 }
 
+.add-button {
+  color: green;
+}
+
 .add-button svg {
   height: 30px;
   width: 30px;
@@ -99,10 +130,30 @@ table .delete {
 }
 
 .back-button {
-  display: block;
+  display: inline-block;
   text-align: start;
-  margin: 25px 25px 0;
+  margin: 18px 15px 0;
+  width: 100px;
+  float: right;
 }
+
+hr.back-button-hr {
+  display: block; 
+  height: 1px;
+  border: 0; 
+  border-top: 1px solid #ccc;
+  margin: 1em 0; 
+  padding: 0;
+}
+
+form {
+  padding: 0 5px 5px;
+  border-radius: 10px;
+  border: 3px #3765ae solid;
+  margin-bottom: 15px;
+  margin-top: 27px;
+}
+
 
 .add-button,
 .back-button,
@@ -110,6 +161,24 @@ table .delete {
   padding: 0;
   /* width: 30px;
   height: 30px; */
+  text-align: start;
+}
+
+.add-button, .edit-button {
+  /* float: right; */
+  margin: 5px;
+}
+
+.edit-button {
+  color: orangered; 
+}
+
+.edit-button-disable {
+  color: grey;
+}
+
+.edit-button-disable svg {
+  fill: grey !important;
 }
 
 .back-button svg {
@@ -161,7 +230,7 @@ table .delete {
   font-size: 20pt;
   padding: 10px;
   color: white;
-  margin-bottom: 70px;
+  margin-bottom: 40px;
 }
 
 @media screen and (max-width: 400) {
