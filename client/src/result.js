@@ -38,7 +38,7 @@ function Result(){
   };
   return (
     <div className="Results"  > 
-      <main>
+      <main dir="ltr">
         <ThemeProvider theme={theme}>
           <Typography component="h1" variant="h5">
               فحص الحالة

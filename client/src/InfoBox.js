@@ -11,8 +11,7 @@ function InfoBox({title , value , total}) {
                     <Typography className="InfoBox__total"  >
                         المجموع   {total}
                       </Typography>
-                
-               
-         </div>  )}
+         </div>  
+        )}
 export default InfoBox;
 
