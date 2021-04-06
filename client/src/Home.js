@@ -1,11 +1,8 @@
 import React, { useEffect, useState   } from "react";
 import "./Home.css"; 
 import {  MenuItem,FormControl,  Select, CardContent, Card } from "@material-ui/core";
-import InfoBox from "./InfoBox";
 import {sortData} from "./Util"
 import Axios from 'axios';
-import Chart from './chart'
-import Instruction from './instruction'
 
 function  Home() {
   const [cities ,setCities] = useState([]) ;
@@ -16,20 +13,6 @@ function  Home() {
   const [countryInfo, setCountryInfo] = useState("");
   const [tableData, setTableData] = useState([]);
   const [casesType, setCasesType] = useState("cases");
-    
-    // const [date, setDate] = useState([])
-    // const columns = [
-    //   { title: "ID", field: "id" },
-    //   { title: "Username", field: "areaname" }
-
-    // ]
-    // useEffect(() => {
-    //   fetch("http://localhost:2000/subareas")
-    //     .then(resp => resp.json())
-    //     .then(resp => {
-    //       setDate(resp)
-    //     })
-    // }, [])
 
   useEffect(() => {
     fetch("http://localhost:2000/subareas")
