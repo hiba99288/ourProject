@@ -244,3 +244,9 @@ form {
     margin: 5px 0;
   }
 }
+
+.table-search-input {
+  margin: 15px auto;
+  display: block;
+  text-align: center;
+}

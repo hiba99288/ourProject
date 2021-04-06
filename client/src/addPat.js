@@ -51,8 +51,6 @@ function AddPat() {
       setPatientList(response.data);
     });
   };
-  const [newDOB, setNewDOB] = useState(0);
-  const [newName, setNewName] = useState("");
 
   const updatePatient = (Idnumber) => {
     console.log(Idnumber);
@@ -98,6 +96,7 @@ function AddPat() {
 
   const [countries, setCountries] = useState([]);
   const [patientList, setPatientList] = useState([]);
+  const [search, setSearch] = useState("");
 
   const [cities, setCities] = useState([]);
   useEffect(() => {
@@ -125,18 +124,18 @@ function AddPat() {
 
   return (
     <div className="main">
-      <h2 class="main-title">المرضى</h2>
+      <h2 className="main-title">المرضى</h2>
       {showAdd ? (
         <form onSubmit={addPatient}>
-          <div class="button back-button"  onClick={() => setShowAdd(!showAdd)}>
+          <div className="button back-button"  onClick={() => setShowAdd(!showAdd)}>
             {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 3.752l-4.423-3.752-7.771 9.039-7.647-9.008-4.159 4.278c2.285 2.885 5.284 5.903 8.362 8.708l-8.165 9.447 1.343 1.487c1.978-1.335 5.981-4.373 10.205-7.958 4.304 3.67 8.306 6.663 10.229 8.006l1.449-1.278-8.254-9.724c3.287-2.973 6.584-6.354 8.831-9.245z"/></svg> */}
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm4.151 17.943l-4.143-4.102-4.117 4.159-1.833-1.833 4.104-4.157-4.162-4.119 1.833-1.833 4.155 4.102 4.106-4.16 1.849 1.849-4.1 4.141 4.157 4.104-1.849 1.849z"/></svg>
             {/* <p>رجوع</p> */}
           </div>
-          <h3 class="sub-title">إضافة مريض</h3>
-          <hr class=".back-button-hr" />
+          <h3 className="sub-title">إضافة مريض</h3>
+          <hr className=".back-button-hr" />
           <br/>
-          <div class="addPat-add-card">
+          <div className="addPat-add-card">
             <label className="name">الاسم </label>
             <input
               className="firstname"
@@ -145,12 +144,12 @@ function AddPat() {
             />
           </div>
           
-          <div class="addPat-add-card">
+          <div className="addPat-add-card">
             <label className="name">رقم الهوية</label>
             <input className="firstname" onChange={handleChange("Idnumber")} />
           </div>
           
-          <div class="addPat-add-card">
+          <div className="addPat-add-card">
             <label className="name">رقم الهاتف</label>
             <input
               className="firstname"
@@ -159,12 +158,12 @@ function AddPat() {
             />
           </div>
           
-          <div class="addPat-add-card">
+          <div className="addPat-add-card">
             <label className="name">الايميل</label>
             <input className="firstname" onChange={handleChange("email")} />
           </div>
           
-          <div class="addPat-add-card sex">
+          <div className="addPat-add-card sex">
             <label className="name"> الجنس</label>
             <label className="radio">
               ذكر
@@ -189,7 +188,7 @@ function AddPat() {
             </label>
           </div>
           
-          <div class="addPat-add-card">
+          <div className="addPat-add-card">
             <label className="name"> سنة الميلاد</label>
             <input
               className="firstname"
@@ -198,7 +197,7 @@ function AddPat() {
             />
           </div>
           
-          <div class="addPat-add-card">
+          <div className="addPat-add-card">
             <label className="name">تاريخ الفحص</label>
             <input
               className="firstname"
@@ -207,7 +206,7 @@ function AddPat() {
             />
           </div>
           
-          <div class="addPat-add-card">
+          <div className="addPat-add-card">
             <label className="name">المنطقة</label>
             <select className="option" onChange={handleChange("address")}>
               {countries.map((subareas, index) => (
@@ -216,7 +215,7 @@ function AddPat() {
             </select>
           </div>
           
-          <div class="addPat-add-card">
+          <div className="addPat-add-card">
             <label className="name">سبب الفحص</label>
             <select className="option" onChange={handleChange("reason")}>
               <option> مخالط</option>
@@ -233,17 +232,24 @@ function AddPat() {
         </form>
       ) : (
         <div>
-          <div class="button add-button" onClick={() => setShowAdd(!showAdd)}>
+          <input className="table-search-input"
+            type="text"
+            placeholder="ابحث هنا"
+            onChange={(e) => {
+              setSearch(e.target.value);
+            }}
+          />
+          <div className="button add-button" onClick={() => setShowAdd(!showAdd)}>
             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12 0c-6.627 0-12 5.373-12 12s5.373 12 12 12 12-5.373 12-12-5.373-12-12-12zm7 14h-5v5h-4v-5h-5v-4h5v-5h4v5h5v4z"/></svg>
             <p>إضافة مريض</p>
           </div>
           {show ? (
-              <div class="button edit-button" onClick={() => setShow(!show)}>
+              <div className="button edit-button" onClick={() => setShow(!show)}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M7.127 22.562l-7.127 1.438 1.438-7.128 5.689 5.69zm1.414-1.414l11.228-11.225-5.69-5.692-11.227 11.227 5.689 5.69zm9.768-21.148l-2.816 2.817 5.691 5.691 2.816-2.819-5.691-5.689z"/></svg>
                 <p>تفعيل وضع التعديل</p>
               </div>
             ) : (
-              <div class="button edit-button edit-button-disable" onClick={() => setShow(!show)}>
+              <div className="button edit-button edit-button-disable" onClick={() => setShow(!show)}>
                 <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M7.127 22.562l-7.127 1.438 1.438-7.128 5.689 5.69zm1.414-1.414l11.228-11.225-5.69-5.692-11.227 11.227 5.689 5.69zm9.768-21.148l-2.816 2.817 5.691 5.691 2.816-2.819-5.691-5.689z"/></svg>
                 <p>تعطيل وضع التعديل</p>
               </div>
@@ -260,7 +266,16 @@ function AddPat() {
               </tr>
             </thead>
             <tbody>
-              {patientList.map((val, index) => {
+              {patientList
+              .filter((item) => {
+                if (search == "") {
+                  return item;
+                } else if (
+                  item.name.toLowerCase().includes(search.toLowerCase())
+                ) {
+                  return item;
+                }
+              }).map((val, index) => {
                 return (
                   <>
                     {show ? (
@@ -287,7 +302,16 @@ function AddPat() {
                           <input
                             defaultValue={val.name}
                             onChange={(event) => {
-                              setPatientList(patientList.map((item,index) => {
+                              setPatientList(patientList
+                                .filter((item) => {
+                                  if (search == "") {
+                                    return item;
+                                  } else if (
+                                    item.name.toLowerCase().includes(search.toLowerCase())
+                                  ) {
+                                    return item;
+                                  }
+                                }).map((item,index) => {
                                 if (item.Idnumber == val.Idnumber) {
                                   item.name = event.target.value;
                                 }
@@ -306,7 +330,16 @@ function AddPat() {
                           <input
                             defaultValue={val.DOB}
                             onChange={(event) => {
-                              setPatientList(patientList.map((item,index) => {
+                              setPatientList(patientList
+                                .filter((item) => {
+                                  if (search == "") {
+                                    return item;
+                                  } else if (
+                                    item.name.toLowerCase().includes(search.toLowerCase())
+                                  ) {
+                                    return item;
+                                  }
+                                }).map((item,index) => {
                                 if (item.DOB == val.DOB) {
                                   item.name = event.target.value;
                                 }
@@ -319,14 +352,14 @@ function AddPat() {
                           <input placeholder={val.address}></input>
                         </td>
                         <td>
-                          <div class="button update"
+                          <div className="button update"
                             onClick={() => {
                               updatePatient(val.Idnumber);
                             }}
                           >
                             <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M22 2v20h-20v-20h20zm2-2h-24v24h24v-24zm-5.541 8.409l-1.422-1.409-7.021 7.183-3.08-2.937-1.395 1.435 4.5 4.319 8.418-8.591z"/></svg>
                           </div>
-                          <div class="button delete"
+                          <div className="button delete"
                             onClick={() => {
                               deletePatient(val.Idnumber);
                             }}
