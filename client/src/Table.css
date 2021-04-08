@@ -111,11 +111,12 @@ table .button * {
 }
 
 table .update {
-  fill: green;
+  fill: rgb(228 132 0);
 }
 
 table .delete {
   fill: red;
+  transform: scale(0.8);
 }
 
 .add-button {
@@ -133,8 +134,14 @@ table .delete {
   display: inline-block;
   text-align: start;
   margin: 18px 15px 0;
-  width: 100px;
+  width: 28px;
   float: right;
+  color: red;
+  /* font-weight: bold;
+  border-radius: 10px;
+  border: 2px solid red;
+  padding: 2px;
+  box-sizing: border-box; */
 }
 
 hr.back-button-hr {
@@ -183,6 +190,7 @@ form {
 
 .back-button svg {
   fill: red;
+  transform: scale(-1, 1);
 }
 
 .edit-button svg {
@@ -219,7 +227,8 @@ form {
   display: inline-block;
 }
 
-.addbtn {
+.addbtn,
+.edtbtn {
   margin-top: 40px;
   height: 60px;
   width: 150px;
@@ -231,6 +240,12 @@ form {
   padding: 10px;
   color: white;
   margin-bottom: 40px;
+}
+
+.edtbtn {
+  background-color: #af6d16;
+  border: 3px #a76510 solid;
+
 }
 
 @media screen and (max-width: 400) {
