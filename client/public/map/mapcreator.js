@@ -1,3 +1,9 @@
+function closeModal(){
+    document.querySelector('#map-data').innerHTML = '';
+    document.querySelector('#map-data').style.display = 'none';
+}
+
+
 // mapCreator function, called after data is ready
 function mapCreator(data){
 
@@ -40,6 +46,7 @@ function mapCreator(data){
                 <div dir="rtl" 
                     style="text-align: center; font-weight: bold;"
                 >
+                    <span id="close-modal" onClick="closeModal()">x</span>
                     <div style="text-align: center; margin: 3px auto; display: block; font-size: 23pt;">${x.areaname}</div>
                     ${mapInfoCard("عدد السكان",x.population,'purple')}<br/>
                     ${mapInfoCard("الإصابات الكلية",(x.casestotal  + x.recovered + x.deaths),'navy')}
@@ -50,7 +57,12 @@ function mapCreator(data){
             `;
 
             let thisMarker = L.marker([x.latitude,x.longitude]);
-            thisMarker.bindPopup(popupContent);
+            // thisMarker.bindPopup(popupContent);
+            // thisMarker.on('click', (e, popupContent)=>{
+            //     e.preventDefault();
+            //     document.querySelector('#map-data').innerHTML = popupContent;
+            //     document.querySelector('#map-data').style.display = block;
+            // });
             
             let thisCircle = L.circle([x.latitude, x.longitude], {
                 color: x.color,
@@ -59,7 +71,13 @@ function mapCreator(data){
                 radius: x.radius
             });
 
-            thisCircle.bindPopup(popupContent);
+            thisCircle.on('click', (e)=>{
+                console.log(popupContent);
+                document.querySelector('#map-data').innerHTML = popupContent;
+                document.querySelector('#map-data').style.display = 'block';
+            });
+
+            // thisCircle.bindPopup(popupContent);
             
             
             // thisCircle.on('click', x => {
@@ -117,9 +135,9 @@ function mapCreator(data){
         L.control.watermark({position: 'bottomleft'}).addTo(map);
 
     // Events
-        map.on("click", e=>{
-            console.table(e.latlng);
-            console.log(e);
-            console.log(JSON.stringify(data));
-        });
+        // map.on("click", e=>{
+        //     console.table(e.latlng);
+        //     console.log(e);
+        //     console.log(JSON.stringify(data));
+        // });
 }

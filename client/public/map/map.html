@@ -8,7 +8,6 @@
 
     <style>
         .leaflet-popup-content-wrapper,
-        #map-data,
         body
         {
             background-color: #fff5ce !important;
@@ -31,6 +30,30 @@
             top: 0;
             right: 0;
             /* height: 100%; */
+        }
+
+        #map-data {
+            box-sizing: border-box;
+            z-index: 800;
+            position: absolute;
+            left: 35px;
+            top: 25px;
+            padding: 15px;
+            width: 220px;
+            max-height: calc(95vh - 70px);
+            /* background-color: #fff5ce; */
+            background-color:#daf0fc;
+            border: 4px solid #4aa4dc;
+            border-radius: 18px;
+            display: none;
+        }
+
+        #close-modal {
+            color: red;
+            float: right;
+            margin-top: -10px;
+            cursor: pointer;
+            font-size: 25pt;
         }
 
         @media screen and (max-width: 600px){
@@ -62,15 +85,6 @@
 
             
 
-            #map-data {
-                position: absolute;
-                right: 0;
-                top: 0;
-                padding: auto;
-                width: 220px;
-                bottom: 0;
-                
-            }
 
         }
 
@@ -78,18 +92,20 @@
             box-sizing: border-box;
             margin: 3px;
             padding: 0px;
-            border-radius: 5px;
+            border-radius: 10px;
             display: inline-block !important;
             overflow: hidden;
             width: 160px;
             height: 30px;
             color: white;
             text-align: center;
+            border: 1px solid #4aa4dc;
+
         }
 
         .map-info-card * {
             margin: 0 !important;
-            padding: 0 4px;
+            padding: 0 3px;
             height: 100%;
             line-height: 100%;
             vertical-align: middle;
@@ -120,7 +136,7 @@
 </head>
 <body>
     <div id="map"></div>
-    <!-- <div id="map-data"></div> -->
+    <div id="map-data"></div>
 
     <script>
 
