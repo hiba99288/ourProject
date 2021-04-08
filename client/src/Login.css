@@ -1,9 +1,9 @@
  .Login{
-     height:548px;
-     background-image: url("./../src/img/corona.png" );
+    background-image: url("./../src/img/corona.png" );
     background-repeat: no-repeat;
     background-size: cover; 
-    padding-top: 60px; 
+    padding-top: 17vh; 
+    min-height: calc(100vh - 65px);
 }
  img{
  backdrop-filter: opacity(90px);
