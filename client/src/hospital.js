@@ -65,6 +65,11 @@ const Hospitals = () => {
 
   const [show, setShow] = useState(true);
   const [showAdd, setShowAdd] = useState(false);
+  const [edit, setEdit] = useState(false);
+
+  const [edity, setEdity] = useState({
+
+  });
 
   useEffect(() => {
     getHospitals();
