@@ -49,8 +49,20 @@ function AddPat() {
   };
 
   const getPatients = () => {
-    Axios.get("http://localhost:2000/patient").then((response) => {
-      setPatientList(response.data);
+    Axios.get("http://localhost:2000/patient", {headers: {token: localStorage.getItem('token')}}).then((response) => {
+      console.log(response);
+      if( response.data == 'error'){
+        console.log('error');
+        window.alert('Error');
+      } else if(response.status == 200){
+        try {
+          setPatientList([...response.data]);
+        } finally {
+
+        }
+      } else {
+        console.log('error');
+      }
     });
   };
 
@@ -152,7 +164,7 @@ function AddPat() {
   return (
     <div className="main">
       <h2 className="main-title">المرضى</h2>
-      {showAdd ? (
+      { (localStorage.getItem('token') && showAdd) ? (
         <form onSubmit={addPatient}>
           <div className="button back-button"  onClick={(e) => closeForm(e, 'add')}>
             {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 3.752l-4.423-3.752-7.771 9.039-7.647-9.008-4.159 4.278c2.285 2.885 5.284 5.903 8.362 8.708l-8.165 9.447 1.343 1.487c1.978-1.335 5.981-4.373 10.205-7.958 4.304 3.67 8.306 6.663 10.229 8.006l1.449-1.278-8.254-9.724c3.287-2.973 6.584-6.354 8.831-9.245z"/></svg> */}
@@ -258,7 +270,7 @@ function AddPat() {
             اضافة
           </div>
         </form>
-      ) : showEdit ? (      
+      ) : (localStorage.getItem('token') && showEdit) ? (      
         <form onSubmit={e=>updatePatient(edity)}>
           <div className="button back-button"  onClick={(e) => closeForm(e, 'edit')}>
             {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 3.752l-4.423-3.752-7.771 9.039-7.647-9.008-4.159 4.278c2.285 2.885 5.284 5.903 8.362 8.708l-8.165 9.447 1.343 1.487c1.978-1.335 5.981-4.373 10.205-7.958 4.304 3.67 8.306 6.663 10.229 8.006l1.449-1.278-8.254-9.724c3.287-2.973 6.584-6.354 8.831-9.245z"/></svg> */}
@@ -407,7 +419,7 @@ function AddPat() {
                 <th>الحنس</th>
                 <th>تاريخ الميلاد</th>
                 <th>مكان السكن</th>
-                <th>إجراءات</th>
+                {localStorage.getItem('token') ? <th>إجراءات</th>: ''}
               </tr>
             </thead>
             <tbody>
@@ -440,26 +452,28 @@ function AddPat() {
                         <td>
                           {val.address}
                         </td>
-                        <td>
-                          <div className="button update"
-                            onClick={(e) => {
-                              e.preventDefault();
-                              setEdity(val);
-                              setShowEdit(true);
-                            }}
-                          >
-                            {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M22 2v20h-20v-20h20zm2-2h-24v24h24v-24zm-5.541 8.409l-1.422-1.409-7.021 7.183-3.08-2.937-1.395 1.435 4.5 4.319 8.418-8.591z"/></svg> */}
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M14.078 4.232l-12.64 12.639-1.438 7.129 7.127-1.438 12.641-12.64-5.69-5.69zm-10.369 14.893l-.85-.85 11.141-11.125.849.849-11.14 11.126zm2.008 2.008l-.85-.85 11.141-11.125.85.85-11.141 11.125zm18.283-15.444l-2.816 2.818-5.691-5.691 2.816-2.816 5.691 5.689z"/></svg>
-                          </div>
-                          <div className="button delete"
-                            onClick={() => {
-                              deletePatient(val.Idnumber);
-                            }}
-                          >
-                            {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M22 2v20h-20v-20h20zm2-2h-24v24h24v-24zm-6 16.538l-4.592-4.548 4.546-4.587-1.416-1.403-4.545 4.589-4.588-4.543-1.405 1.405 4.593 4.552-4.547 4.592 1.405 1.405 4.555-4.596 4.591 4.55 1.403-1.416z"/></svg> */}
-                            <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 3.752l-4.423-3.752-7.771 9.039-7.647-9.008-4.159 4.278c2.285 2.885 5.284 5.903 8.362 8.708l-8.165 9.447 1.343 1.487c1.978-1.335 5.981-4.373 10.205-7.958 4.304 3.67 8.306 6.663 10.229 8.006l1.449-1.278-8.254-9.724c3.287-2.973 6.584-6.354 8.831-9.245z"/></svg>
-                          </div>
-                        </td>
+                        {localStorage.getItem('token') ? 
+                          <td>
+                            <div className="button update"
+                              onClick={(e) => {
+                                e.preventDefault();
+                                setEdity(val);
+                                setShowEdit(true);
+                              }}
+                            >
+                              {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M22 2v20h-20v-20h20zm2-2h-24v24h24v-24zm-5.541 8.409l-1.422-1.409-7.021 7.183-3.08-2.937-1.395 1.435 4.5 4.319 8.418-8.591z"/></svg> */}
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M14.078 4.232l-12.64 12.639-1.438 7.129 7.127-1.438 12.641-12.64-5.69-5.69zm-10.369 14.893l-.85-.85 11.141-11.125.849.849-11.14 11.126zm2.008 2.008l-.85-.85 11.141-11.125.85.85-11.141 11.125zm18.283-15.444l-2.816 2.818-5.691-5.691 2.816-2.816 5.691 5.689z"/></svg>
+                            </div>
+                            <div className="button delete"
+                              onClick={() => {
+                                deletePatient(val.Idnumber);
+                              }}
+                            >
+                              {/* <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M22 2v20h-20v-20h20zm2-2h-24v24h24v-24zm-6 16.538l-4.592-4.548 4.546-4.587-1.416-1.403-4.545 4.589-4.588-4.543-1.405 1.405 4.593 4.552-4.547 4.592 1.405 1.405 4.555-4.596 4.591 4.55 1.403-1.416z"/></svg> */}
+                              <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M24 3.752l-4.423-3.752-7.771 9.039-7.647-9.008-4.159 4.278c2.285 2.885 5.284 5.903 8.362 8.708l-8.165 9.447 1.343 1.487c1.978-1.335 5.981-4.373 10.205-7.958 4.304 3.67 8.306 6.663 10.229 8.006l1.449-1.278-8.254-9.724c3.287-2.973 6.584-6.354 8.831-9.245z"/></svg>
+                            </div>
+                          </td> : ''
+                        }
                       </tr>
                   </>
                 );
