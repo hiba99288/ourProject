@@ -1,5 +1,6 @@
 import React from 'react';
 import {BrowserRouter as Router , Switch , Route } from 'react-router-dom';
+import { useState} from 'react';
 import Home from './Home';
 import Login from './Login';
 import Result from './result';
@@ -13,13 +14,22 @@ import './App.css'
 import Instruction from './instruction'
 //<link href="https://fonts.googleapis.com/css?family=Titillium+Web:300,400,700" rel="stylesheet"></link>
 function App(){ 
+
+  const [statenum, setStatenum ] = useState(1);
+
+  const forceUpdateFunction = (function() {
+    setStatenum(statenum+1);
+  });
+
   return (
     <Router>
-      <NavBar></NavBar>
+      <NavBar updateForcer={forceUpdateFunction}></NavBar>
       <Switch>
         <Route exact component={Home} path="/"/>
         <Route exact component={Home} path="/home"/>
-        <Route exact component={Login} path="/login"/>
+        <Route exact path="/login" render={
+          (props)=> <Login {...props} updateForcer={forceUpdateFunction} />
+        }/>
         <Route exact component={AdminPage2} path="/adminPage2"/>
         <Route exact component={Result} path="/result"/>
         <Route exact component={Instruction} path="/Instruction"/>
