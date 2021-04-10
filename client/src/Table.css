@@ -19,6 +19,9 @@ h3.sub-title {
   width: 280px;
 }
 
+* {
+  text-align: center;
+}
 
 table {
   width: 100%;
@@ -36,6 +39,8 @@ table {
   overflow: hidden;
   /* border: 3px solid #3765ae; */
 }
+
+
 
 thead {
   background-color: #3765ae;

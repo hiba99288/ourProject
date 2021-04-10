@@ -24,6 +24,7 @@ function App(){
   return (
     <Router>
       <NavBar updateForcer={forceUpdateFunction}></NavBar>
+      <div className="navbar-navroot-margin-fix"></div>
       <Switch>
         <Route exact component={Home} path="/"/>
         <Route exact component={Home} path="/home"/>

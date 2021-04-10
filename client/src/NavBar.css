@@ -1,4 +1,19 @@
 
+.navbar-navroot {
+    position: fixed !important;
+    width: 100vw;
+    z-index: 15 !important;
+    margin-bottom: 75px;
+}
+
+.navbar-nav-root * {
+    z-index: inherit;
+}
+
+.navbar-navroot-margin-fix {
+    height: 65px;
+}
+
 #navbar-logo {
 position: absolute;
 z-index: 15;
