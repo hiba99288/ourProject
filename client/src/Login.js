@@ -14,52 +14,104 @@ import { makeStyles } from '@material-ui/core/styles';
 import Container from '@material-ui/core/Container';
 
 const useStyles = makeStyles((theme) => ({
-      form: {
-      width: '100%', // Fix IE 11 issue.
-      marginTop: theme.spacing(1),
-    },
-    submit: {
-      margin: theme.spacing(3, 0, 2),
-    },
-  }));
+  form: {
+    width: "100%", // Fix IE 11 issue.
+    marginTop: theme.spacing(1),
+  },
+  submit: {
+    margin: theme.spacing(3, 0, 2),
+  },
+}));
 
-function Login(){
-    const classes = useStyles();
-const [username , setUsername ]=useState("");
-const [password , setPassword ]=useState("");
- const history = useHistory(); 
-const login = (e) => {
-e.preventDefault();
-Axios.post("http://localhost:2000/login",{
-username:username,
-password:password,
- }).then((response)=>{
-    if (response.data==false){
-      // sweetalert
-        history.push('./Login');}
-    else{
-        if(response.data[0].account_type=="admin")
- history.push('./adminPage2');
- else  if(response.data[0].account_type=="dr")
- history.push('./doctorpage'); }  
- console.log(response);}); };
+function Login(props){
+  const classes = useStyles();
+  const [username , setUsername ]=useState("");
+  const [password , setPassword ]=useState("");
+  const history = useHistory(); 
+  const {updateForcer, ...other} = props;
 
-return ( 
-<div className="Login" dir="ltr">
-  <Container component="main" maxWidth="xs">
+  console.log(props);
+
+  const login = (e) => {
+    e.preventDefault();
+    Axios.post("http://localhost:2000/login",{
+      username:username,
+      password:password,
+    })
+      .then((response)=>{
+        console.log(response);
+        if (response.data==false){
+            history.push('./Login');
+        } else {
+          if(response.data[0].account_type=="admin"){
+            localStorage.setItem("account_type", "admin");
+            localStorage.setItem('token', response.data[0].token);
+            localStorage.setItem('username', response.data[0].username);
+            history.push('./adminPage2');
+          } else  if(response.data[0].account_type=="dr") {
+            localStorage.setItem("account_type", "dr");
+            localStorage.setItem('token', response.data[0].token);
+            localStorage.setItem('username', response.data[0].username);
+            history.push('./doctorpage');
+          }
+          updateForcer();
+        }
+      }
+    );
+  }
+
+  return (
+    <div className="Login" dir="ltr">
+      <Container component="main" maxWidth="xs">
         <CssBaseline />
         <div className={classes.paper}>
-        
           <Typography component="h1" variant="h5">
             تسجيل الدخول
-          </Typography> 
-          <form class="login-form" method="POST"
-    onSubmit={login} >
-      <TextField variant="outlined"  margin="normal"  required   fullWidth id="email" label="اسم المستخدم"  name="email"autoComplete="email" autoFocus onChange={(e)=>{setUsername(e.target.value);}}/>
-       <TextField  variant="outlined"  margin="normal" required fullWidth name="password"  label="كلمة السرّ" type="password" id="password" autoComplete="current-password" onChange={(e)=>{setPassword(e.target.value);} } />
-         
- 
- <Button  type="submit"  fullWidth variant="contained"  color="primary"  className={classes.submit}>تسجيل الدخول</Button></form></div></Container></div>
-)}
-export default Login ;
+          </Typography>
+          <form class="login-form" method="POST" onSubmit={login}>
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              id="email"
+              label="اسم المستخدم"
+              name="email"
+              autoComplete="email"
+              autoFocus
+              onChange={(e) => {
+                setUsername(e.target.value);
+              }}
+            />
+            <TextField
+              variant="outlined"
+              margin="normal"
+              required
+              fullWidth
+              name="password"
+              label="كلمة السرّ"
+              type="password"
+              id="password"
+              autoComplete="current-password"
+              onChange={(e) => {
+                setPassword(e.target.value);
+              }}
+            />
+  
+            <Button
+              type="submit"
+              fullWidth
+              variant="contained"
+              color="primary"
+              className={classes.submit}
+            >
+              تسجيل الدخول
+            </Button>
+          </form>
+        </div>
+      </Container>
+    </div>
+  );
+}
 
+export default Login;
