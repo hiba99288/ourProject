@@ -12,6 +12,8 @@ import PersonIcon from '@material-ui/icons/Person';
 import VerifiedUserIcon from '@material-ui/icons/VerifiedUser';
 import ClickAwayListener from '@material-ui/core/ClickAwayListener';
 import CoronaImg from './../src/img/logo.png';
+import {useHistory} from 'react-router-dom';
+
  const useStyles = makeStyles((theme) => ({
   root: { flexGrow: 1, },
   menuButton: { marginRight: theme.spacing(2), },
@@ -20,11 +22,68 @@ import CoronaImg from './../src/img/logo.png';
   menueList:{ width:'100%', },
   logo: {  width: 100, height: 100, [theme.breakpoints.down('sm')]: {  width: 180, margin: 5, }, }, }));
   
-  export default function NavBar() {
+export default function NavBar(props) {
+  const history = useHistory();
+
   const classes = useStyles();
   const [open, setOpen] = React.useState(false);
   const handleClick = () => { setOpen((prev) => !prev); };
   const handleClickAway = () => {  setOpen(false); };
+
+  const account_type = localStorage.getItem('account_type');
+
+  let loggedin = false;
+  if ( (account_type == 'admin') || (account_type == 'dr') ) {
+    loggedin = true;
+  }
+
+  const {updateForcer, ...other} = props;
+
+  const logout = () => {
+    fetch('http://localhost:2000/logout', {
+      method: 'POST',
+      data: JSON.stringify({
+        username: localStorage.getItem('username'),
+        token: localStorage.getItem('token')
+      })
+    }).then((res)=>{
+      if (res.status == 200) {
+        localStorage.removeItem('account_type');
+        localStorage.removeItem('token');
+        localStorage.removeItem('username');
+      } else {
+        console.log('Serverside error');
+        localStorage.removeItem('account_type');
+        localStorage.removeItem('token');
+        localStorage.removeItem('username');
+      }
+    }).catch(err=>{
+      alert("Couldn't log out. Check internet connection");
+      console.log('Logout error', err);
+    })
+
+    history.push('/');
+    updateForcer();
+  }
+
+  const logoutButton = () => {
+    const account_type = localStorage.getItem('account_type');
+    // console.log(localStorage.getItem('account_type'));
+    // console.log('admin? ', localStorage.getItem('account_type') == 'admin')
+    // console.log('dr? ', localStorage.getItem('account_type') == 'dr')
+    if( (account_type === 'admin') || (account_type === 'dr') ){
+      console.log('rendering');
+      return (
+        <Button color='inherit' href="#"
+          onClick={(e)=>{logout()}}
+        >
+          <VerifiedUserIcon />
+          تسجيل الخروج
+        </Button>
+      )
+    }
+  }
+
  return (
     <div className={classes.root} className="navbar-navroot">
       <AppBar position='static' style={{backgroundColor:"#00aeff  " , color:"white", height: "65px"}}>
@@ -40,10 +99,16 @@ import CoronaImg from './../src/img/logo.png';
               <HomeIcon />
               الرئيسيه
             </Button>
-            <Button color='inherit' href='/Login'>
-              <PersonIcon />
-              تسجيل الدخول
-            </Button>
+
+            {!loggedin ?
+              <Button color='inherit' href='/Login'>
+                <PersonIcon />
+                تسجيل الدخول
+              </Button> :
+              ''
+            }
+
+
             <Button color='inherit' href='/result'>
               <VerifiedUserIcon />
               فحص حالة
@@ -56,11 +121,13 @@ import CoronaImg from './../src/img/logo.png';
               <VerifiedUserIcon />
             ارشادات
             </Button>
-            <hr />
+
+            {logoutButton()}
+            {/* <hr />
             <Button className={classes.menueList} >تعليمات</Button>
             <Button className={classes.menueList}>تواصل معنا</Button>
             <Button className={classes.menueList}>احصائيات عالميه</Button>
-            <Button className={classes.menueList}>abute us</Button> 
+            <Button className={classes.menueList}>abute us</Button>  */}
           </div>) : null}
             </IconButton>
           </ClickAwayListener>
@@ -70,10 +137,13 @@ import CoronaImg from './../src/img/logo.png';
             <HomeIcon />
             الرئيسيه
           </Button>
-          <Button color='inherit' href='/Login'>
-            <PersonIcon />
-            تسجيل الدخول
-          </Button>
+          {!loggedin ?
+              <Button color='inherit' href='/Login'>
+                <PersonIcon />
+                تسجيل الدخول
+              </Button> :
+              ''
+            }
           <Button color='inherit' href='/result'>
             <VerifiedUserIcon />
             فحص حالة
@@ -86,6 +156,7 @@ import CoronaImg from './../src/img/logo.png';
             <VerifiedUserIcon />
            ارشادات
           </Button>
+          {logoutButton()}
 
         </Toolbar>
         {/* <Typography variant='h6' className={classes.title}> */}
