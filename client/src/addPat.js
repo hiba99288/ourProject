@@ -419,7 +419,7 @@ function AddPat() {
                 <th>الحنس</th>
                 <th>تاريخ الميلاد</th>
                 <th>مكان السكن</th>
-                {localStorage.getItem('token') ? <th>إجراءات</th>: ''}
+                { ( localStorage.getItem('account_type') == 'admin' ) ? <th>إجراءات</th>: ''}
               </tr>
             </thead>
             <tbody>
@@ -452,7 +452,7 @@ function AddPat() {
                         <td>
                           {val.address}
                         </td>
-                        {localStorage.getItem('token') ? 
+                        { ( localStorage.getItem('account_type') == 'admin' ) ? 
                           <td>
                             <div className="button update"
                               onClick={(e) => {
