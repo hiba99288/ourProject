@@ -103,6 +103,34 @@ app.get("/api/hospitals", (req, res) => {
   );
 });
 
+app.delete("/hospital/:name", (req, res) => {
+  const token = req.get("token");
+  console.log(token);
+  db.query(
+    "SELECT * FROM  users WHERE token =? and account_type = 'admin' limit 1",
+    [token],
+    (err, result) => {
+      if (err) {
+        res.send("error777");
+        console.log(err);
+      } else if (result.length > 0) {
+        const name = req.params.name;
+        db.query(
+          "DELETE FROM hospitals WHERE H_name = ?",
+          name,
+          (err, result) => {
+            if (err) {
+              console.log(err);
+            } else {
+              res.send(result);
+            }
+          }
+        );
+      }
+    }
+  );
+});
+
 app.get("/api/instructions", (req, res) => {
   db.query("SELECT * FROM instructions;", (err, result) => {
     if (err) {

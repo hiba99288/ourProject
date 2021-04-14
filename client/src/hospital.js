@@ -40,16 +40,16 @@ const Hospitals = () => {
     });
   };
 
-  const deleteHospital = (Idnumber) => {
+  const deleteHospital = (H_name) => {
     /* eslint-disable no-restricted-globals */
     if (confirm('هل تريد حذف هذا السجل نهائياً؟')){
     /* eslint-enable no-restricted-globals */
-      Axios.delete(`http://localhost:2000/deletehospital/${Idnumber}`,  {headers: {token: localStorage.getItem('token')}}).then(
+      Axios.delete(`http://localhost:2000/hospital/${H_name}`,  {headers: {token: localStorage.getItem('token')}}).then(
         (response) => {
           if (response.status == 200) {
             setHospitalList(
               hospitalList.filter((val) => {
-                return val.Idnumber != Idnumber;
+                return val.H_name != H_name;
               })
             );
             alert('تم الحذف بنجاح');
