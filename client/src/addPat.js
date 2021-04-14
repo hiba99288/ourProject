@@ -76,6 +76,7 @@ function AddPat() {
   }
 
   const updatePatient = (edity) => {
+    console.log('edity', edity);
     Axios.post("http://localhost:2000/update", edity).then((response) => {
       if((response.status == 200) && response.data == "success"){
         console.log('Record Updated');
@@ -161,6 +162,8 @@ function AddPat() {
   const [showAdd, setShowAdd] = useState(false);
   const [showPat, setShowPat] = useState(false);
 
+  console.log(edity);
+
   return (
     <div className="main">
       <h2 className="main-title">المرضى</h2>
@@ -240,7 +243,7 @@ function AddPat() {
           <div className="addPat-add-card">
             <label className="name">تاريخ الفحص</label>
             <input
-              className="firstname"
+              className="date"
               type="date"
               onChange={handleChange("chk_date")}
             />
@@ -289,7 +292,7 @@ function AddPat() {
               value={edity.name}
               onChange={(e)=>{
                 e.preventDefault();
-                setEdity({name: e.target.value});
+                setEdity({...edity, name: e.target.value});
               }}
             />
           </div>
@@ -359,13 +362,19 @@ function AddPat() {
             <input
               className="firstname"
               type="date"
-              onChange={handleChange("chk_date")}
+              onChange={(e)=>{
+                e.preventDefault();
+                setEdity({...edity, chk_date: e.target.value});
+              }}
             />
           </div>
           
           <div className="addPat-add-card">
             <label className="name">المنطقة</label>
-            <select className="option" onChange={handleChange("address")}>
+            <select className="option" onChange={(e)=>{
+                e.preventDefault();
+                setEdity({...edity, address: e.target.value});
+              }}>
               {countries.map((subareas, index) => (
                 <option key={index} value={subareas.value}>{subareas.name}</option>
               ))}
@@ -374,7 +383,10 @@ function AddPat() {
           
           <div className="addPat-add-card">
             <label className="name">سبب الفحص</label>
-            <select className="option" onChange={handleChange("reason")}>
+            <select className="option" onChange={(e)=>{
+                e.preventDefault();
+                setEdity({...edity, reason: e.target.value});
+              }}>
               <option> مخالط</option>
               <option> سفر</option>
               <option> ظهور اعراض المرض</option>
@@ -383,7 +395,7 @@ function AddPat() {
           </div>
           
           <br/>
-          <div className="button addbtn" onClick={e=>updatePatient()}>
+          <div className="button addbtn" onClick={e=>updatePatient(edity)}>
             حفظ
           </div>
         </form>
@@ -457,7 +469,9 @@ function AddPat() {
                             <div className="button update"
                               onClick={(e) => {
                                 e.preventDefault();
+
                                 setEdity(val);
+                                console.log(edity);
                                 setShowEdit(true);
                               }}
                             >

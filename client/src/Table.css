@@ -23,6 +23,11 @@ h3.sub-title {
   text-align: center;
 }
 
+.date, .option {
+  font-size: small;
+  font-weight: bold;
+}
+
 table {
   width: 100%;
   max-width: 100%;

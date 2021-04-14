@@ -303,15 +303,18 @@ app.post("/update", (req, res) => {
     chk_date,
     reason,
   } = req.body;
+  console.log(req.body);
   db.query(
     "UPDATE patient SET DOB = ?, name = ?,phonenum = ?,sex = ?,address = ? ,email = ? ,reason = ? WHERE Idnumber = ?",
     [DOB, name, phonenum, sex, address, email, reason, Idnumber],
     (err, result) => {
       if (err) {
         console.log(err);
-      } else {
+      } else if (result.affectedRaws == 0) {
         // res.send(result);
-        res.send("success");
+        res.send(result);
+      } else {
+        res.send('success');
       }
     }
   );
