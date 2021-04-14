@@ -292,43 +292,69 @@ app.post("/tests", (req, res) => {
 });
 
 app.post("/update", (req, res) => {
-  let {
-    name,
-    Idnumber,
-    phonenum,
-    sex,
-    address,
-    email,
-    DOB,
-    chk_date,
-    reason,
-  } = req.body;
-  console.log(req.body);
+  const token = req.get("token");
+  console.log(token);
   db.query(
-    "UPDATE patient SET DOB = ?, name = ?,phonenum = ?,sex = ?,address = ? ,email = ? ,reason = ? WHERE Idnumber = ?",
-    [DOB, name, phonenum, sex, address, email, reason, Idnumber],
+    "SELECT * FROM  users WHERE token =? and account_type = 'admin' limit 1",
+    [token],
     (err, result) => {
       if (err) {
+        res.send("error777");
         console.log(err);
-      } else if (result.affectedRaws == 0) {
-        // res.send(result);
-        res.send(result);
-      } else {
-        res.send('success');
+      } else if (result.length > 0) {
+        let {
+          name,
+          Idnumber,
+          phonenum,
+          sex,
+          address,
+          email,
+          DOB,
+          chk_date,
+          reason,
+        } = req.body;
+        console.log('req-body', req.body);
+        db.query(
+          "UPDATE patient SET DOB = ?, name = ?,phonenum = ?,sex = ?,address = ? ,email = ? ,reason = ? WHERE Idnumber = ?",
+          [DOB, name, phonenum, sex, address, email, reason, Idnumber],
+          (err, result) => {
+            if (err) {
+              console.log(err);
+            } else if (result.affectedRaws == 0) {
+              // res.send(result);
+              res.send(result);
+            } else {
+              res.send('success');
+            }
+          }
+        );
       }
     }
   );
 });
 app.delete("/delete/:Idnumber", (req, res) => {
-  const Idnumber = req.params.Idnumber;
+  const token = req.get("token");
+  console.log(token);
   db.query(
-    "DELETE FROM patient WHERE Idnumber = ?",
-    Idnumber,
+    "SELECT * FROM  users WHERE token =? and account_type = 'admin' limit 1",
+    [token],
     (err, result) => {
       if (err) {
+        res.send("error777");
         console.log(err);
-      } else {
-        res.send(result);
+      } else if (result.length > 0) {
+        const Idnumber = req.params.Idnumber;
+        db.query(
+          "DELETE FROM patient WHERE Idnumber = ?",
+          Idnumber,
+          (err, result) => {
+            if (err) {
+              console.log(err);
+            } else {
+              res.send(result);
+            }
+          }
+        );
       }
     }
   );

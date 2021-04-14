@@ -77,7 +77,7 @@ function AddPat() {
 
   const updatePatient = (edity) => {
     console.log('edity', edity);
-    Axios.post("http://localhost:2000/update", edity).then((response) => {
+    Axios.post("http://localhost:2000/update", edity, {headers: {token: localStorage.getItem('token')}}).then((response) => {
       if((response.status == 200) && response.data == "success"){
         console.log('Record Updated');
         updatePatient2();
@@ -95,7 +95,7 @@ function AddPat() {
     /* eslint-disable no-restricted-globals */
     if (confirm('هل تريد حذف هذا السجل نهائياً؟')){
     /* eslint-enable no-restricted-globals */
-      Axios.delete(`http://localhost:2000/delete/${Idnumber}`).then(
+      Axios.delete(`http://localhost:2000/delete/${Idnumber}`, {headers: {token: localStorage.getItem('token')}}).then(
         (response) => {
           if (response.status == 200) {
             setPatientList(
