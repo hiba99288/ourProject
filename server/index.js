@@ -76,18 +76,31 @@ app.get("/cases", (req, res) => {
 });
 
 app.get("/api/hospitals", (req, res) => {
-  db.query("SELECT * FROM hospitals;", (err, result) => {
-    if (err) {
-      res.send({ err: err });
-    }
+  const token = req.get("token");
+  console.log(token);
+  db.query(
+    "SELECT * FROM  users WHERE token =? and account_type = 'admin' limit 1",
+    [token],
+    (err, result) => {
+      if (err) {
+        res.send("error777");
+        console.log(err);
+      } else if (result.length > 0) {
+        db.query("SELECT * FROM hospitals;", (err, result) => {
+          if (err) {
+            res.send({ err: err });
+          }
 
-    if (result.length > 0) {
-      console.log(result);
-      res.send(result);
-    } else {
-      res.send(false);
+          if (result.length > 0) {
+            console.log(result);
+            res.send(result);
+          } else {
+            res.send(false);
+          }
+        });
+      }
     }
-  });
+  );
 });
 
 app.get("/api/instructions", (req, res) => {

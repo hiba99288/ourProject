@@ -15,7 +15,7 @@ const Hospitals = () => {
 
 
   const getHospitals = () => {
-    Axios.get("http://localhost:2000/api/hospitals").then((response) => {
+    Axios.get("http://localhost:2000/api/hospitals", {headers: {token: localStorage.getItem('token')}}).then((response) => {
       setHospitalList(response.data);
     });
   };
@@ -28,7 +28,7 @@ const Hospitals = () => {
     });
     console.log(result[0]);
 
-    Axios.post("http://localhost:2000/updatehospital", result[0]).then((response) => {
+    Axios.post("http://localhost:2000/updatehospital", result[0], {headers: {token: localStorage.getItem('token')}}).then((response) => {
       if((response.status == 200) && response.data == "success"){
         console.log('Record Updated');
         alert('تم التعديل');
@@ -44,7 +44,7 @@ const Hospitals = () => {
     /* eslint-disable no-restricted-globals */
     if (confirm('هل تريد حذف هذا السجل نهائياً؟')){
     /* eslint-enable no-restricted-globals */
-      Axios.delete(`http://localhost:2000/deletehospital/${Idnumber}`).then(
+      Axios.delete(`http://localhost:2000/deletehospital/${Idnumber}`,  {headers: {token: localStorage.getItem('token')}}).then(
         (response) => {
           if (response.status == 200) {
             setHospitalList(
@@ -92,9 +92,7 @@ const Hospitals = () => {
   const History = useHistory();
   const addHospital = (e) => {
     e.preventDefault();
-    Axios.post("http://localhost:2000/createhospital", {
-      values,
-    }).then(() => {
+    Axios.post("http://localhost:2000/createhospital", {values}, {headers: {token: localStorage.getItem('token')}}).then(() => {
       console.log("success");
       setValues(emptyHospitalData);
       History.push("/adminPage2");
