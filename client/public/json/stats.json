@@ -1,0 +1,38 @@
+[
+    {
+        "city": "Hebron",
+        "active_cases": 33,
+        "recovered": 44,
+        "deaths": 9
+    },
+    {
+        "city": "Nablus",
+        "active_cases": 23,
+        "recovered": 12,
+        "deaths": 8
+    },
+    {
+        "city": "Jerusalem",
+        "active_cases": 55,
+        "recovered": 19,
+        "deaths": 13
+    },
+    {
+        "city": "Bethlehem",
+        "active_cases": 20,
+        "recovered": 35,
+        "deaths": 5
+    },
+    {
+        "city": "Jenin",
+        "active_cases": 33,
+        "recovered": 12,
+        "deaths": 9
+    },
+    {
+        "city": "Tulkarem",
+        "active_cases": 15,
+        "recovered": 8,
+        "deaths": 1
+    }
+]

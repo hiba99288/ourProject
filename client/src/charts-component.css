@@ -20,6 +20,7 @@
 
 .chart_cases_pies > h2 {
     display: block !important;
+    margin-top: 40px;
 }
 
 .chart_cases_pies > * {
@@ -44,4 +45,8 @@
 
 .chart_div_table_title {
     margin-bottom: 0;
+}
+
+h1, h2, h3, h4, h5 {
+    color: #3765ae;
 }
