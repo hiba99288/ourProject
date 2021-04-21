@@ -12,6 +12,10 @@ import Footer from './footer';
 import Hospital from './hospital';
 import './App.css'
 import Instruction from './instruction'
+
+import ChartComponent from './charts-component';
+
+
 //<link href="https://fonts.googleapis.com/css?family=Titillium+Web:300,400,700" rel="stylesheet"></link>
 function App(){ 
 
@@ -37,6 +41,7 @@ function App(){
         <Route exact component={AddPat} path="/AddPat"/>
         <Route exact component={doctorpage} path="/doctorpage"/>
         <Route exact component={Hospital} path="/hospital"/>
+        <Route exact component={ChartComponent} path="/chart" />
       </Switch>
     </Router> 
   )

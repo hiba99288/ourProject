@@ -1,0 +1,56 @@
+[
+    {
+        "city": "Hebron",
+        "active_male_cases": 33,
+        "active_female_cases": 22,
+        "recovered_male_cases": 12,
+        "recovered_female_cases": 11,
+        "died_male_cases": 9,
+        "died_female_cases": 8
+    },
+    {
+        "city": "Nablus",
+        "active_male_cases": 44,
+        "active_female_cases": 15,
+        "recovered_male_cases": 9,
+        "recovered_female_cases": 8,
+        "died_male_cases": 3,
+        "died_female_cases": 2
+    },
+    {
+        "city": "Jenin",
+        "active_male_cases": 55,
+        "active_female_cases": 34,
+        "recovered_male_cases": 8,
+        "recovered_female_cases": 9,
+        "died_male_cases": 5,
+        "died_female_cases": 7
+    },
+    {
+        "city": "Jericho",
+        "active_male_cases": 33,
+        "active_female_cases": 22,
+        "recovered_male_cases": 12,
+        "recovered_female_cases": 11,
+        "died_male_cases": 9,
+        "died_female_cases": 8
+    },
+    {
+        "city": "Ramallah",
+        "active_male_cases": 33,
+        "active_female_cases": 22,
+        "recovered_male_cases": 12,
+        "recovered_female_cases": 11,
+        "died_male_cases": 9,
+        "died_female_cases": 8
+    },
+    {
+        "city": "Bethlehem",
+        "active_male_cases": 33,
+        "active_female_cases": 22,
+        "recovered_male_cases": 12,
+        "recovered_female_cases": 11,
+        "died_male_cases": 9,
+        "died_female_cases": 8
+    }
+]
