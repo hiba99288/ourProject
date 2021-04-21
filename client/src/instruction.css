@@ -2,6 +2,12 @@
     height: calc(100vh - 65px) !important;
 } 
 
+@media screen and (max-width: 670px) {
+  .carousel {
+    height: 70vw !important;
+  }
+}
+
 .carousel-image {
   height: min(95%, 80vw)  !important;
   margin: 0 auto;
@@ -165,6 +171,7 @@
     margin-right: 15%;
     margin-left: 15%;
     list-style: none;
+    max-height: 25px;
   }
   
   .carousel-indicators li {
@@ -172,8 +179,7 @@
     flex: 0 1 auto;
     width: 35px;
     height: 5px;
-    margin-right: 3px;
-    margin-left: 3px;
+    margin: 3px;
     text-indent: -999px;
     cursor: pointer;
     background-color: #49afff;
@@ -206,3 +212,19 @@
     text-align: center;
   }
   
+.instructions-text {
+  margin: 35px auto 25px;
+  width: clamp(280px, 80%, 750px);
+  padding: 10px;
+  color: #3765ae;
+  font-size: larger;
+}
+
+.instructions-text h2 {
+  margin: 10px auto 20px;
+}
+
+.instructions-text li {
+  margin: 2px;
+  text-align: start;
+}

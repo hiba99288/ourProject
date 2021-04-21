@@ -4,23 +4,28 @@ import './instruction.css';
 
 export default function Instruction(props) {
   const [galleryItems, setGalleryItems] = useState({});
-  // useEffect(()=>{
-  //   const getData = () => {
-  //     axios
-  //       .get(`http://localhost:2000/api/instructions`, {})
-  //       .then((res) => {
-  //         const data = res.data;
-  //         const p = data.map((m) => <h3> {m.Instruction_text} </h3>);
-  //         setGalleryItems({
-  //           galleryItems: p,
-  //         });
-  //       })
-  //       .catch((error) => {
-  //         console.log(error);
-  //       });
-  //   }
-  //   getData();
-  // });
+  useEffect(()=>{
+    const getData = () => {
+      axios
+        .get(`http://localhost:2000/api/instructions`, {})
+        .then((res) => {
+          console.log(res);
+          if(res.status == 200){
+            setData(res.data);
+          } else {
+            console.log(res);
+          }
+        })
+        .catch((error) => {
+          console.log(error);
+        });
+    }
+    if(data.length == 0){
+      getData();
+    }
+  });
+
+  const [data, setData] = useState([]);
 
   const carouselImages = [
     {img: '/images/a3rad.png', caption: 'ارشادات'},
@@ -33,7 +38,7 @@ export default function Instruction(props) {
     {img: '/images/irshadat.png', caption: 'ارشادات'},
   ]
 
-  console.log(carouselImages);
+  // console.log(carouselImages);
 
   return (
     <main >
@@ -49,7 +54,7 @@ export default function Instruction(props) {
           {/* <!--Slides--> */}
           <div className="carousel-inner" role="listbox">
               {carouselImages.map((item, index)=>{
-                console.log(item);
+                // console.log(item);
                 return(
                   <div key={index} className={index == 0 ? 'carousel-item active' : 'carousel-item'} 
                     style={{background: `url(${item.img}) no-repeat cover;`}}
@@ -74,7 +79,12 @@ export default function Instruction(props) {
       </div>
       {/* <!--/.Carousel Wrapper--> */}
       <div className='instructions-text'>
-        
+        <h2>أرشادات هامة</h2>
+        <ul>
+          {data.map(x => (
+            <li>{x.instruction_text}</li>
+          ))}
+        </ul>
       </div>
     </main>
   );
