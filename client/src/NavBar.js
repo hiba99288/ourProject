@@ -1,4 +1,4 @@
-import React from 'react';
+import React, {useState} from 'react';
 import './NavBar.css';
 import { makeStyles } from '@material-ui/core/styles';
 import AppBar from '@material-ui/core/AppBar';
@@ -39,6 +39,8 @@ export default function NavBar(props) {
 
   const {updateForcer, ...other} = props;
 
+  const [statenum, setStatenum] = useState(0);
+
   const logout = () => {
     fetch('http://localhost:2000/logout', {
       method: 'POST',
@@ -51,11 +53,13 @@ export default function NavBar(props) {
         localStorage.removeItem('account_type');
         localStorage.removeItem('token');
         localStorage.removeItem('username');
+        setStatenum(statenum+1);
       } else {
         console.log('Serverside error');
         localStorage.removeItem('account_type');
         localStorage.removeItem('token');
         localStorage.removeItem('username');
+        setStatenum(statenum+1);
       }
     }).catch(err=>{
       alert("Couldn't log out. Check internet connection");
@@ -63,7 +67,6 @@ export default function NavBar(props) {
     })
 
     history.push('/');
-    updateForcer();
   }
 
   const logoutButton = () => {
