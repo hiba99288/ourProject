@@ -28,14 +28,17 @@ export default function Instruction(props) {
   const [data, setData] = useState([]);
 
   const carouselImages = [
-    {img: '/images/a3rad.png', caption: 'ارشادات'},
-    {img: '/images/image.jpg', caption: 'ارشادات'},
-    {img: '/images/instruction00.png', caption: 'ارشادات'},
-    {img: '/images/instruction123.png', caption: 'ارشادات'},
+    // {img: '/images/a3rad.png', caption: 'ارشادات'},
+    // {img: '/images/image.jpg', caption: 'ارشادات'},
+    {img: '/images/Palestina2.jpg', caption: 'ارشادات'},
+    // {img: '/images/instruction00.png', caption: 'ارشادات'},
+    {img: '/images/instruction00.jpg', caption: 'ارشادات'},
+    // {img: '/images/instruction123.png', caption: 'ارشادات'},
+    {img: '/images/instruction123.jpg', caption: 'ارشادات'},
     {img: '/images/irshadat2.png', caption: 'ارشادات'},
     {img: '/images/irshadat3.jpg', caption: 'ارشادات'},
     {img: '/images/irshadat4.jpg', caption: 'ارشادات'},
-    {img: '/images/irshadat.png', caption: 'ارشادات'},
+    // {img: '/images/irshadat.png', caption: 'ارشادات'},
   ]
 
   // console.log(carouselImages);

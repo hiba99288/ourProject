@@ -17,12 +17,12 @@
 #navbar-logo {
 position: absolute;
 z-index: 15;
-top: 2.1vw;
+top: 1.8vw;
 left: 6.3vw;
-width: 20vw;
-height: 18vw;
-max-width: 140px;
-max-height: 115px;
+width: 12vw;
+height: 20vw;
+max-width: 85px;
+max-height: 125px;
 }
 
 .navbar-toolbar {
