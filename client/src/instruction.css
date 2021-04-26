@@ -1,5 +1,6 @@
 .carousel {
-    height: clamp(270px, 75vh, 670px) !important;
+  height: clamp(270px, 35vw, 670px) !important;
+  max-height: 75vh;
 } 
 
 main {
@@ -102,7 +103,7 @@ main {
   .carousel-control-prev,
   .carousel-control-next {
     position: absolute;
-    top: 0;
+    top: 15px;
     bottom: 0;
     z-index: 1;
     display: flex;
@@ -161,7 +162,7 @@ main {
   .carousel-indicators {
     position: absolute;
     right: 0;
-    top: min(93%, 77vw);
+    top: min(90%, 75vw);
     left: 0;
     z-index: 15;
     display: flex;
@@ -171,6 +172,7 @@ main {
     margin-left: 15%;
     list-style: none;
     max-height: 25px;
+
   }
   
   .carousel-indicators li {
