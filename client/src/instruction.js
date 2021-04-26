@@ -11,6 +11,7 @@ export default function Instruction(props) {
         .then((res) => {
           console.log(res);
           if(res.status == 200){
+            console.log('res.data', res.data);
             setData(res.data);
           } else {
             console.log(res);
@@ -27,6 +28,8 @@ export default function Instruction(props) {
 
   const [data, setData] = useState([]);
 
+  console.log(data);
+
   const carouselImages = [
     // {img: '/images/a3rad.png', caption: 'ارشادات'},
     // {img: '/images/image.jpg', caption: 'ارشادات'},
@@ -41,10 +44,19 @@ export default function Instruction(props) {
     // {img: '/images/irshadat.png', caption: 'ارشادات'},
   ]
 
+  const colors = [
+    "FireBrick",
+    "DarkGreen",
+    "DarkViolet",
+    "DarkRed",
+    "DarkBlue",
+    "DarkMagenta",
+  ];
+
   // console.log(carouselImages);
 
   return (
-    <main >
+    <main>
       {/* <!--Carousel Wrapper--> */}
       <div id="carousel-example-1z" class="carousel slide carousel-fade" data-ride="carousel">
           {/* <!--Indicators--> */}
@@ -84,8 +96,11 @@ export default function Instruction(props) {
       <div className='instructions-text'>
         <h2>أرشادات هامة</h2>
         <ul>
-          {data.map(x => (
-            <li>{x.instruction_text}</li>
+          {data.map((x, i) => (
+            <li>
+              <span style={{backgroundColor: colors[(i%colors.length)]}}>{i+1}</span>
+              <p style={{color: colors[(i%colors.length)]}}>{x.Instruction_text}</p>
+            </li>
           ))}
         </ul>
       </div>

@@ -1,11 +1,10 @@
 .carousel {
-    height: calc(100vh - 65px) !important;
+    height: clamp(270px, 75vh, 670px) !important;
 } 
 
-@media screen and (max-width: 670px) {
-  .carousel {
-    height: 70vw !important;
-  }
+main {
+  width: clamp(320px, 80vw, 1000px);
+  margin: auto;
 }
 
 .carousel-image {
@@ -213,18 +212,52 @@
   }
   
 .instructions-text {
-  margin: 35px auto 25px;
-  width: clamp(280px, 80%, 750px);
+  margin: 10px auto 25px;
+  width: clamp(280px, 90%, 750px);
   padding: 10px;
   color: #3765ae;
   font-size: larger;
 }
 
 .instructions-text h2 {
-  margin: 10px auto 20px;
+  margin: 5px auto 20px;
 }
 
 .instructions-text li {
-  margin: 2px;
+  margin: 2px auto 15px;
   text-align: start;
+  list-style: none;
+  background-color: #c4f0ff;
+  padding: 12px;
+  color: black;
+  font-size: 15pt;
+  border-radius: 3px;
+
+  display: flex;
+  flex-direction: row;
+  flex-wrap: nowrap;
+  justify-content: space-between;
+  align-items: center;
+  align-content: space-around;
+
+}
+
+.instructions-text li span {
+  border-radius: 50%;
+  padding: 3px;
+  width: 48px;
+  height: 48px;
+  /* background-color: crimson; */
+  color: white;
+  line-height: 48px;
+  font-weight: bold;
+  text-align: center;
+  font-size: 17pt;
+}
+
+.instructions-text li p {
+  /* color: crimson; */
+  width: calc(100% - 60px);
+  text-align: start;
+  margin: 0;
 }
