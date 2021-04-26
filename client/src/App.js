@@ -12,6 +12,7 @@ import Footer from './footer';
 import Hospital from './hospital';
 import './App.css'
 import Instruction from './instruction'
+import ChangePassword from './ChangePassword'
 
 import ChartComponent from './charts-component';
 
@@ -42,6 +43,7 @@ function App(){
         <Route exact component={doctorpage} path="/doctorpage"/>
         <Route exact component={Hospital} path="/hospital"/>
         <Route exact component={ChartComponent} path="/chart" />
+        <Route exact component={ChangePassword} path="/changepass" />
       </Switch>
     </Router> 
   )

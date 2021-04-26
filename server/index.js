@@ -430,3 +430,23 @@ app.get("*", (req, res) => {
 app.listen(2000, () => {
   console.log("running in 2000");
 });
+
+
+app.post("/api/changepass", (req, res) => {
+  const {oldpass, newpass, username, token} = req.body;
+  console.log(req.body);
+  db.query(
+    'update users set password = ? WHERE username = ? AND token = ? AND password = ?',
+    [newpass, username, token, oldpass],
+    (err, result) => {
+      if (err) {
+        res.send(err);
+      } else if (result.changedRows == 1) {
+        res.send('success')
+      } else {
+        res.send(result);
+      }
+    }
+  );
+});
+
